@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Botifiy Marketing Website
 
-## Getting Started
+موقع Botifiy التسويقي - منصة أتمتة واتساب بالكلمات المفتاحية
 
-First, run the development server:
+## التقنيات المستخدمة
+
+- **Next.js 15** (App Router)
+- **TypeScript**
+- **Tailwind CSS** مع دعم RTL
+- **shadcn/ui** للمكونات
+- **Inter** خط المشروع
+
+## المميزات
+
+- ✅ دعم كامل للغة العربية (RTL)
+- ✅ تصميم متجاوب (mobile-first)
+- ✅ ألوان وتصميم Botifiy المخصص
+- ✅ مكونات shadcn/ui محسنة
+- ✅ تحسين لمحركات البحث (SEO)
+
+## التثبيت والتشغيل
+
+### 1. تثبيت المكتبات
+
+```bash
+npm install
+```
+
+### 2. تشغيل المشروع محلياً
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+الموقع سيكون متاحاً على [http://localhost:3000](http://localhost:3000)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3. بناء المشروع للإنتاج
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+## هيكل المشروع
 
-To learn more about Next.js, take a look at the following resources:
+```
+src/
+├── app/
+│   ├── globals.css          # الأنماط العامة مع دعم RTL
+│   ├── layout.tsx           # التخطيط الرئيسي مع RTL
+│   └── page.tsx             # الصفحة الرئيسية
+├── components/
+│   ├── ui/                  # مكونات shadcn/ui
+│   │   ├── button.tsx
+│   │   └── card.tsx
+│   ├── hero-section.tsx     # قسم البطل
+│   ├── features-section.tsx # قسم المميزات
+│   ├── testimonials-section.tsx # قسم آراء العملاء
+│   ├── cta-section.tsx      # قسم الدعوة للعمل
+│   └── footer.tsx           # التذييل
+└── lib/
+    └── utils.ts             # مساعدات عامة
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## الألوان المخصصة
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```css
+--primary: #60DE2E          /* الأخضر الأساسي */
+--primary-dark: #0B3404     /* الأخضر الداكن */
+--primary-light: #E7FBD9    /* الأخضر الفاتح */
+--surface-alt: #F5FFF1      /* خلفية بديلة */
+--text-primary: #0B3404     /* النص الأساسي */
+--text-secondary: #325327   /* النص الثانوي */
+```
 
-## Deploy on Vercel
+## الأوامر المفيدة
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+# تشغيل المشروع
+npm run dev
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# بناء المشروع
+npm run build
+
+# تشغيل الإنتاج
+npm start
+
+# فحص الأخطاء
+npm run lint
+```
+
+## ملاحظات مهمة
+
+- الموقع مصمم بالكامل للغة العربية مع دعم RTL
+- جميع النصوص والمحتوى باللغة العربية كما هو محدد في `info.json`
+- التصميم مستوحى من موقع Crisp مع ألوان Botifiy المخصصة
+- يستخدم shadcn/ui للمكونات مع تخصيصات Botifiy
+
+## الدعم
+
+للحصول على المساعدة أو الإبلاغ عن مشاكل، يرجى التواصل مع فريق Botifiy. 
