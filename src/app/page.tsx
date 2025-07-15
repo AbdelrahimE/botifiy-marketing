@@ -24,7 +24,7 @@ export default function HomePage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen" dir="rtl">
+      <main className="min-h-screen">
         <HeroSection />
         <FeaturesSection />
         <HowItWorksSection />
