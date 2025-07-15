@@ -51,10 +51,10 @@ export function ChatbotSection() {
           }
         `}
       </style>
-      <section className="relative bg-gradient-to-b from-primary/8 via-green-50/50 to-primary/5">
+      <section className="relative overflow-hidden bg-gradient-to-b from-primary/8 via-green-50/50 to-primary/5">
         
         {/* Floating Separator Icons */}
-        <div className="absolute -top-10 left-0 right-0 h-24 z-[5] pointer-events-none">
+        <div className="absolute left-0 right-0 top-0 h-40 z-[5] pointer-events-none">
           {floatingIcons.map((item, index) => {
             const Icon = item.icon;
             return (

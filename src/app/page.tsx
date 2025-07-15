@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { trackViewHome } from "@/lib/gtm";
-// import { Header } from "@/components/header"
-// import { HeroSection } from "@/components/hero-section"
+import { Header } from "@/components/header"
+import { HeroSection } from "@/components/hero-section"
 import { FeaturesSection } from "@/components/features-section"
 import { HowItWorksSection } from "@/components/how-it-works-section"
 import { ToolsSection } from "@/components/tools-section"
@@ -23,19 +23,19 @@ export default function HomePage() {
 
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <main className="min-h-screen">
-      {/* <HeroSection /> */}
-        <FeaturesSection />
-        <HowItWorksSection />
-        <CampaignsSection />
-        <ChatbotSection />
-        <ToolsSection />
-        <SentimentSection />
-        <DashboardSection />
-        <FreeTrialSection />
-        <CtaSection />
-        <Footer />
+      <HeroSection />
+      <FeaturesSection />
+      <HowItWorksSection />
+      <CampaignsSection />
+      <ChatbotSection />
+      <ToolsSection />
+      <SentimentSection />
+      <DashboardSection />
+      <FreeTrialSection />
+      <CtaSection />
+      <Footer />
       </main>
     </>
   )

@@ -61,14 +61,14 @@ export function Header() {
           <div className="flex items-center order-1">
             <a
               href="/"
-              className="flex items-center transition-transform duration-300 hover:scale-105"
+              className="flex items-center justify-center transition-transform duration-300 hover:scale-105"
             >
               <Image
                 src="/images/botifiy-logo-ar.png"
                 alt="شعار بوتيفاي"
                 width={150}
                 height={48}
-                className="h-12 w-auto"
+                className="h-10 w-auto md:h-12 md:w-auto"
               />
             </a>
           </div>
