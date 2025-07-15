@@ -23,7 +23,7 @@ export default function HomePage() {
 
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <main className="min-h-screen">
         <HeroSection />
         <FeaturesSection />
