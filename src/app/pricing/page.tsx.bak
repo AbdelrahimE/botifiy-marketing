@@ -336,7 +336,7 @@ export default function PricingPage() {
                                 } else {
                                   trackClickPlan(plan.name, billingPeriod, 'pricing_section')
                                 }
-                              } catch {
+                              } catch (error) {
                                 // Silent error handling
                               }
                             }}
@@ -398,7 +398,7 @@ export default function PricingPage() {
                                 onClick={() => {
                                   try {
                                     trackClickSignup('contact-sales');
-                                  } catch {
+                                  } catch (error) {
                                     // Silent error handling
                                   }
                                 }}
@@ -528,7 +528,7 @@ export default function PricingPage() {
                                     } else {
                                       trackClickPlan(plan.name, billingPeriod, 'comparison-table-desktop')
                                     }
-                                  } catch {
+                                  } catch (error) {
                                     // Silent error handling
                                   }
                                 }}
@@ -610,7 +610,7 @@ export default function PricingPage() {
                                     } else {
                                       trackClickPlan(plan.name, billingPeriod, 'comparison-table-mobile')
                                     }
-                                  } catch {
+                                  } catch (error) {
                                     // Silent error handling
                                   }
                                 }}
@@ -637,7 +637,7 @@ export default function PricingPage() {
         <Footer />
       </>
     )
-  } catch {
+  } catch (error) {
     // عرض رسالة خطأ للمستخدم بدلاً من صفحة بيضاء
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
