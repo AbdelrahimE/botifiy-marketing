@@ -12,15 +12,32 @@ const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
 })
 
 export const metadata: Metadata = {
-  title: 'Botifiy – The Ultimate WhatsApp Automation Tool',
+  metadataBase: new URL('https://botifiy.com'),
+  title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
   description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
   keywords: ['WhatsApp', 'automation', 'chatbot', 'customer service', 'AI', 'sentiment analysis'],
   authors: [{ name: 'Botifiy' }],
   openGraph: {
-    title: 'Botifiy – The Ultimate WhatsApp Automation Tool',
+    title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
     description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
     type: 'website',
     locale: 'ar',
+    url: 'https://botifiy.com',
+    siteName: 'بوتيفاي',
+    images: [
+      {
+        url: '/botifiy-social.png',
+        width: 600,
+        height: 315,
+        alt: 'بوتيفاي - أتمتة وتسويق واتساب بالذكاء الاصطناعي',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
+    description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
+    images: ['/botifiy-social.png'],
   },
   icons: {
     icon: '/favicon.ico',

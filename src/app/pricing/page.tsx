@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import {
   Check, ArrowLeft, Building2,
-  Sparkle, Rocket, TrendingUp, Gem, Users, MessagesSquare, Phone, Send, Database, FileUp, Bot, ClipboardList, ClipboardCheck, MessageCircle, BrainCircuit, ShieldCheck
+  Sparkle, Rocket, TrendingUp, Gem, Users, MessagesSquare, Phone, Send, Database, FileUp, Bot, ClipboardCheck, MessageCircle, BrainCircuit, ShieldCheck
 } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
@@ -90,7 +90,7 @@ export default function PricingPage() {
         "30 رد آلي - شات بوت",
         "حملات متزامنة: 1",
         "إدارة حتى 5٬000 جهة اتصال",
-        "قوالب الرسائل بالقوائم: 3",
+        //"قوالب الرسائل بالقوائم: 3",
         "قوالب الاستطلاعات: 3",
         "تخزين 200 ميغابايت",
         "رفع حتى 5 ميغابايت للملف"
@@ -116,13 +116,12 @@ export default function PricingPage() {
         "ربط حتى 2 رقم واتساب",
         "100 رد آلي - شات بوت",
         "حملات متزامنة: 2",
-        "قسم تحليل المشاعر بالذكاء الاصطناعي",
-        "قسم اللايف شات",
         "إدارة حتى 30٬000 جهة اتصال",
-        "قوالب الرسائل بالقوائم: 10",
+        //"قوالب الرسائل بالقوائم: 10",
         "قوالب الاستطلاعات: 10",
         "تخزين 300 ميغابايت",
-        "رفع حتى 10 ميغابايت للملف"
+        "رفع حتى 10 ميغابايت للملف",
+        "تحليل المشاعر بالذكاء الاصطناعي"
       ],
       ctaText: "اشترك الآن",
       highlight: false,
@@ -145,13 +144,13 @@ export default function PricingPage() {
         "ربط حتى 4 أرقام واتساب",
         "300 رد آلي - شات بوت",
         "حملات متزامنة: 4",
-        "قسم تحليل المشاعر بالذكاء الاصطناعي",
-        "قسم اللايف شات",
         "إدارة حتى 100٬000 جهة اتصال",
-        "قوالب الرسائل بالقوائم: 25",
+        //"قوالب الرسائل بالقوائم: 25",
         "قوالب الاستطلاعات: 25",
         "تخزين 500 ميغابايت",
-        "رفع حتى 10 ميغابايت للملف"
+        "رفع حتى 10 ميغابايت للملف",
+        "تحليل المشاعر بالذكاء الاصطناعي",
+        "اللايف شات ( دردشة لحظية )"
       ],
       ctaText: "اشترك الآن",
       highlight: true,
@@ -171,10 +170,10 @@ export default function PricingPage() {
       ["تخزين الملفات", "—", "200 ميغابايت", "300 ميغابايت", "500 ميغابايت"],
       ["حجم الملف المرفوع", "—", "5 ميغابايت", "10 ميغابايت", "10 ميغابايت"],
       ["الردود التلقائية الذكية", "—", "30", "100", "300"],
-      ["قوائم تفاعلية للعملاء", "—", "3", "10", "25"],
+      //["قوائم تفاعلية للعملاء", "—", "3", "10", "25"],
       ["استطلاعات آراء العملاء", "—", "3", "10", "25"],
-      ["اللايف شات ( دردشة لحظية )", "—", "—", "✅", "✅"],
-      ["تحليل ذكي لمشاعر الرسائل", "—", "—", "✅", "✅"]
+      ["تحليل ذكي لمشاعر العملاء", "—", "—", "✅", "✅"],
+      ["اللايف شات ( دردشة لحظية )", "—", "—", "—", "✅"]
     ]
   }
 
@@ -193,10 +192,10 @@ export default function PricingPage() {
     "تخزين الملفات": Database,
     "حجم الملف المرفوع": FileUp,
     "الردود التلقائية الذكية": Bot,
-    "قوائم تفاعلية للعملاء": ClipboardList,
+    //"قوائم تفاعلية للعملاء": ClipboardList,
     "استطلاعات آراء العملاء": ClipboardCheck,
+    "تحليل ذكي لمشاعر العملاء": BrainCircuit,
     "اللايف شات ( دردشة لحظية )": MessageCircle,
-    "تحليل ذكي لمشاعر الرسائل": BrainCircuit,
     "الميزة": ShieldCheck
   }
 
@@ -228,13 +227,13 @@ export default function PricingPage() {
               <div className="flex items-center justify-center gap-2 bg-gradient-to-r from-[#4BC625] to-[#60DE2E] px-6 py-1.5 rounded-full shadow-sm mb-6 w-fit mx-auto">
                 <div className="flex items-center gap-1">
                   <div className="w-6 h-6 relative">
-                    <Image src="/images/trusted1.png" alt="Trust logo 1" fill className="rounded-full object-contain" />
+                    <Image src="/images/trusted1.png" alt="Trust logo 1" fill sizes="24px" className="rounded-full object-contain" />
                   </div>
                   <div className="w-6 h-6 relative">
-                    <Image src="/images/trusted2.png" alt="Trust logo 2" fill className="rounded-full object-contain" />
+                    <Image src="/images/trusted2.png" alt="Trust logo 2" fill sizes="24px" className="rounded-full object-contain" />
                   </div>
                   <div className="w-6 h-6 relative">
-                    <Image src="/images/trusted3.png" alt="Trust logo 3" fill className="rounded-full object-contain" />
+                    <Image src="/images/trusted3.png" alt="Trust logo 3" fill sizes="24px" className="rounded-full object-contain" />
                   </div>
                 </div>
                 <span className="text-sm text-white font-semibold">يثق بنا أكثر من 600 نشاط تجاري عربي</span>
@@ -292,6 +291,7 @@ export default function PricingPage() {
                         : 'bg-white'
                     }`}
                   >
+                    {/* Badge في أعلى البطاقة */}
                     {(plan.highlight || plan.secondaryHighlight) && plan.badge && (
                       <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                         <Badge className={`${
@@ -317,14 +317,25 @@ export default function PricingPage() {
                           {plan.price === 0 ? (
                             <div className="text-4xl font-bold text-primary-dark">مجاناً</div>
                           ) : (
-                            <div className="flex items-baseline justify-end gap-1">
-                              <span className="text-4xl font-bold text-primary-dark">${billingPeriod === 'monthly' ? plan.price : Math.round(plan.price * 10 - 1)}</span>
-                              <span className="text-primary-dark/80 text-lg">{billingPeriod === 'yearly' ? 'سنوياً' : 'شهرياً'}</span>
+                            <div className="flex items-center justify-end gap-2">
+                              {/* السعر الحالي */}
+                              <div className="flex items-baseline gap-1">
+                                <span className="text-3xl font-bold text-primary-dark">${billingPeriod === 'monthly' ? plan.price : Math.round(plan.price * 10 - 1)}</span>
+                                <span className="text-primary-dark/80 text-lg">{billingPeriod === 'yearly' ? 'سنوياً' : 'شهرياً'}</span>
+                              </div>
+
+                              {/* السعر الأصلي وbadge التوفير في نفس الصف */}
+                              {billingPeriod === 'yearly' && (
+                                <>
+                                  <span className="text-base text-gray-400 line-through font-medium">${plan.price * 12}</span>
+                                  <span className="text-xs bg-red-100 text-red-600 px-2.5 py-1 rounded-full font-bold whitespace-nowrap">وفّر ${plan.price * 2}</span>
+                                </>
+                              )}
                             </div>
                           )}
                         </div>
 
-                        <Button asChild className={`w-full py-4 text-lg font-medium ${plan.buttonClassName}`} variant={plan.buttonVariant}>
+                        <Button asChild className={`w-full py-5 text-lg font-medium ${plan.buttonClassName}`} variant={plan.buttonVariant}>
                           <Link 
                             href={plan.link || (billingPeriod === 'monthly' ? plan.monthlyLink : plan.yearlyLink) || '#'} 
                             target="_blank" 

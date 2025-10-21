@@ -67,8 +67,9 @@ export function Header() {
                 src="/images/botifiy-logo-ar.png"
                 alt="شعار بوتيفاي"
                 width={150}
-                height={48}
-                className="h-10 w-auto md:h-12 md:w-auto"
+                height={50}
+                className="h-10 w-auto md:h-12 md:w-auto object-contain"
+                priority
               />
             </a>
           </div>

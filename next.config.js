@@ -4,8 +4,6 @@ const nextConfig = {
     optimizePackageImports: ['lucide-react']
   },
   images: {
-    // إضافة domains للإنتاج وإزالة قيود localhost فقط
-    domains: ['localhost', 'app.botifiy.com', 'botifiy.com'],
     unoptimized: false,
     // إضافة دعم أفضل للصور في الإنتاج
     remotePatterns: [

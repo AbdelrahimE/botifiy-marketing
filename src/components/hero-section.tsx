@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { VideoModal } from "@/components/video-modal"
 import { Star } from "lucide-react"
 import { trackClickSignup } from "@/lib/gtm"
+import Image from "next/image"
 
 export function HeroSection() {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
@@ -69,11 +70,19 @@ export function HeroSection() {
           <div className="mt-10">
             {/* Dashboard Image with Caption */}
             <div className="flex justify-center">
-              <div className="max-w-4xl w-full relative">
-                <img 
-                  src="/images/hero-section.png" 
+              <div className="max-w-4xl w-full">
+                <Image
+                  src="/images/hero-section.png"
                   alt="لقطة شاشة من داخل منصة بوتيفاي - واجهة المستخدم الرئيسية"
+                  width={960}
+                  height={540}
                   className="w-full h-auto max-w-[960px] mx-auto shadow-lg shadow-[#60DE2E]/30 rounded-xl border-2 border-[#60DE2E] drop-shadow-md hover:drop-shadow-lg transition-all duration-300"
+                  priority
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 960px"
+                  style={{
+                    width: '100%',
+                    height: 'auto'
+                  }}
                 />
               </div>
             </div>
