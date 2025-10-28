@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: 'سياسة الخصوصية | بوتيفاي',
   description: 'نحن في بوتيفاي نلتزم بحماية خصوصيتك. تعرف على كيفية جمعنا واستخدامنا وحمايتنا لبياناتك الشخصية.',
   keywords: ['سياسة الخصوصية', 'حماية البيانات', 'شروط الخدمة', 'بوتيفاي', 'Botifiy'],
+  alternates: {
+    canonical: 'https://botifiy.com/privacy-policy',
+  },
   openGraph: {
     title: 'سياسة الخصوصية | بوتيفاي',
     description: 'تعرف على كيفية حماية بوتيفاي لبياناتك.',

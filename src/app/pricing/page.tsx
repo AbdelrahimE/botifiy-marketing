@@ -7,6 +7,7 @@ import {
   Sparkle, Rocket, TrendingUp, Gem, Users, MessagesSquare, Phone, Send, Database, FileUp, Bot, ClipboardCheck, MessageCircle, BrainCircuit, ShieldCheck
 } from "lucide-react"
 import Link from "next/link"
+import Script from "next/script"
 import { useState, useEffect } from "react"
 import { Header } from "@/components/header"
 import { Footer } from "@/components/footer"
@@ -210,6 +211,287 @@ export default function PricingPage() {
   try {
     return (
       <>
+        {/* Pricing Plans Schema - Structured Data */}
+        <Script
+          id="pricing-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              // Free Plan
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                name: 'بوتيفاي - بداية ذكية',
+                description: 'جرب أدوات بوتيفاي من غير التزام. 50 رسالة شهرياً',
+                brand: {
+                  '@type': 'Brand',
+                  name: 'بوتيفاي'
+                },
+                offers: {
+                  '@type': 'Offer',
+                  price: '0',
+                  priceCurrency: 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: 'https://botifiy.com/pricing',
+                  priceValidUntil: '2026-12-31',
+                  seller: {
+                    '@type': 'Organization',
+                    name: 'بوتيفاي'
+                  }
+                },
+                category: 'WhatsApp Automation Software'
+              },
+              // Launch Plan
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                name: 'بوتيفاي - مسار الإطلاق',
+                description: 'مثالية للبدايات الجادة: حملات، ردود تلقائية، تنظيم عملائك - 5,000 رسالة شهرياً',
+                brand: {
+                  '@type': 'Brand',
+                  name: 'بوتيفاي'
+                },
+                offers: {
+                  '@type': 'Offer',
+                  price: '10',
+                  priceCurrency: 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: 'https://botifiy.com/pricing',
+                  priceValidUntil: '2026-12-31',
+                  seller: {
+                    '@type': 'Organization',
+                    name: 'بوتيفاي'
+                  }
+                },
+                category: 'WhatsApp Automation Software'
+              },
+              // Growth Plan
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                name: 'بوتيفاي - النمو المتسارع',
+                description: 'الأفضل لو جمهورك بدأ يكبر. دردشات لحظية، حملات متعددة، وتحليلات ذكية - 30,000 رسالة شهرياً',
+                brand: {
+                  '@type': 'Brand',
+                  name: 'بوتيفاي'
+                },
+                offers: {
+                  '@type': 'Offer',
+                  price: '20',
+                  priceCurrency: 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: 'https://botifiy.com/pricing',
+                  priceValidUntil: '2026-12-31',
+                  seller: {
+                    '@type': 'Organization',
+                    name: 'بوتيفاي'
+                  }
+                },
+                category: 'WhatsApp Automation Software'
+              },
+              // Dominate Plan
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Product',
+                name: 'بوتيفاي - الهيمنة الرقمية',
+                description: 'كل أدوات واتساب بحدود أكبر: أرقام متعددة، حملات اكثر، شات متطور، ذكاء صناعي - 100,000 رسالة شهرياً',
+                brand: {
+                  '@type': 'Brand',
+                  name: 'بوتيفاي'
+                },
+                offers: {
+                  '@type': 'Offer',
+                  price: '30',
+                  priceCurrency: 'USD',
+                  availability: 'https://schema.org/InStock',
+                  url: 'https://botifiy.com/pricing',
+                  priceValidUntil: '2026-12-31',
+                  seller: {
+                    '@type': 'Organization',
+                    name: 'بوتيفاي'
+                  }
+                },
+                category: 'WhatsApp Automation Software',
+                aggregateRating: {
+                  '@type': 'AggregateRating',
+                  ratingValue: '4.9',
+                  ratingCount: '200',
+                  bestRating: '5',
+                  worstRating: '1'
+                }
+              }
+            ])
+          }}
+        />
+
+        {/* FAQ Schema - Structured Data */}
+        <Script
+          id="faq-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'FAQPage',
+              mainEntity: [
+                {
+                  '@type': 'Question',
+                  name: 'هل لازم أكون مبرمج علشان أستخدم المنصة؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'لا أبدًا، كل شيء عندنا سهل ومصمم لرواد الأعمال وأصحاب المشاريع. تربط رقمك في ثواني وتبدأ على طول.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل منصة بوتيفاي تشتغل على WhatsApp الرسمي؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'لا، نستخدم مكتبة Baileys الآمنة. ما تحتاج WhatsApp API من Meta — بس رقم واتساب عادي وشغال.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'ما الفرق بين الخطة المجانية والخطط المدفوعة؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'الخطة المجانية تعطيك 50 رسالة شهريًا لتجربة الأقسام. الخطط المدفوعة تفتح لك عدد أكبر من الرسائل، أكثر من رقم، حملات، شات بوت متطور، وتحليلات ذكية.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل ممكن ينحظر رقم الواتساب؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'بشكل عام، استخدام أدوات تسويق مع واتساب فيه احتمال بسيط للحظر. لكن في بوتيفاي وفرنا لك حماية متقدمة تقلل المخاطر لأقصى حد: تقدر تربط بروكسي خاص برقمك، عندك جدولة ذكية للحملات، نمنع التكرار والإرسال العشوائي تلقائيًا، ونقدم لك إرشادات واضحة لأفضل ممارسات الإرسال.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل أقدر أستخدم أكثر من رقم واتساب؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'نعم، حسب خطتك. بعض الخطط تسمح بـ 2 أو 4 أرقام مرتبطة، تقدر ترسل من كل رقم بشكل فردي او تترك المنصة تبدل الارسال بينهم بشكل تلقائي وتتبع النتائج.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل أقدر أطلب استرجاع بعد الدفع؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'نؤمن تمامًا بحقك كمستخدم، لكن بما إن خدمات المنصة تبدأ مباشرة بعد الاشتراك، فالاسترجاع غير متاح طالما المنصة تعمل بشكل طبيعي وما فيه توقف كامل في الخدمة.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل فيه دعم فني مباشر؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'نعم، عندنا دعم عربي سريع عن طريق الواتساب. وخطط الشركات تحصل على دعم مخصص.'
+                  }
+                },
+                {
+                  '@type': 'Question',
+                  name: 'هل أقدر أصدر تقارير أو بيانات العملاء؟',
+                  acceptedAnswer: {
+                    '@type': 'Answer',
+                    text: 'نعم. كل المحادثات، جهات الاتصال، والتقارير تقدر تصدّرها بصيغة CSV بسهولة.'
+                  }
+                }
+              ]
+            })
+          }}
+        />
+
+        {/* Reviews Schema - Structured Data */}
+        <Script
+          id="reviews-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify([
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Review',
+                itemReviewed: {
+                  '@type': 'SoftwareApplication',
+                  name: 'بوتيفاي'
+                },
+                author: {
+                  '@type': 'Person',
+                  name: 'Mohammed Sawaf'
+                },
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: '5',
+                  bestRating: '5'
+                },
+                reviewBody: 'بالبداية كان في شوية لخبطة وما كنت فاهم كل شي بس بصراحة الدعم عندكم وقف معاي خطوة بخطوة. أكثر شي عجبني هو الشات بوت لانه اختصر علي وقت كثير في الرد علي العملا .. يعني بصراحة منصة بوتيفاي فعلاً فارقة معاي في الشغل'
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Review',
+                itemReviewed: {
+                  '@type': 'SoftwareApplication',
+                  name: 'بوتيفاي'
+                },
+                author: {
+                  '@type': 'Person',
+                  name: 'Eng. Fatima Ali'
+                },
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: '5',
+                  bestRating: '5'
+                },
+                reviewBody: 'يعطيكم العافية يا شباب دعمكم ممتاز وسريع وحليتوا المشكلة بدون تعقيد استمروا الخدمة ممتازة'
+              },
+              {
+                '@context': 'https://schema.org',
+                '@type': 'Review',
+                itemReviewed: {
+                  '@type': 'SoftwareApplication',
+                  name: 'بوتيفاي'
+                },
+                author: {
+                  '@type': 'Person',
+                  name: 'الاستاذ يوسف'
+                },
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: '5',
+                  bestRating: '5'
+                },
+                reviewBody: 'المنصة ماشية معايا تمام من يوم بدات خصوصا سيستم الحملات والجدولة ريحني بصراحة عشان بقدر ابعت الرسايل في اوقات مناسب للزباين عندي'
+              }
+            ])
+          }}
+        />
+
+        {/* Breadcrumb Schema - Structured Data */}
+        <Script
+          id="breadcrumb-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BreadcrumbList',
+              itemListElement: [
+                {
+                  '@type': 'ListItem',
+                  position: 1,
+                  name: 'الرئيسية',
+                  item: 'https://botifiy.com'
+                },
+                {
+                  '@type': 'ListItem',
+                  position: 2,
+                  name: 'الأسعار',
+                  item: 'https://botifiy.com/pricing'
+                }
+              ]
+            })
+          }}
+        />
+
         <Header />
         <main className="min-h-screen bg-gradient-to-br from-primary-light/20 via-white to-primary-light/80" dir="rtl">
           {/* Hero Section */}

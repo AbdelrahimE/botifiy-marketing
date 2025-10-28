@@ -17,6 +17,13 @@ export const metadata: Metadata = {
   description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
   keywords: ['WhatsApp', 'automation', 'chatbot', 'customer service', 'AI', 'sentiment analysis'],
   authors: [{ name: 'Botifiy' }],
+  alternates: {
+    canonical: 'https://botifiy.com',
+    languages: {
+      'ar': 'https://botifiy.com',
+      'x-default': 'https://botifiy.com',
+    },
+  },
   openGraph: {
     title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
     description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
@@ -75,6 +82,37 @@ export default function RootLayout({
               'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
               })(window,document,'script','dataLayer','GTM-5WFNXVRS');
             `,
+          }}
+        />
+
+        {/* Organization Schema - Structured Data */}
+        <Script
+          id="organization-schema"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              name: 'بوتيفاي',
+              alternateName: 'Botifiy',
+              url: 'https://botifiy.com',
+              logo: 'https://botifiy.com/botifiy-social.png',
+              description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
+              foundingDate: '2023',
+              slogan: 'سيطر على كل تواصلات واتساب من مكان واحد وبذكاء غير مسبوق',
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+201098169094',
+                contactType: 'customer support',
+                availableLanguage: ['ar', 'Arabic'],
+                areaServed: ['EG', 'SA', 'AE', 'KW', 'QA', 'BH', 'OM', 'JO', 'LB', 'IQ', 'MA', 'DZ', 'TN', 'LY', 'SD', 'YE', 'SY', 'PS']
+              },
+              sameAs: [],
+              address: {
+                '@type': 'PostalAddress',
+                addressCountry: 'EG'
+              }
+            })
           }}
         />
       </head>

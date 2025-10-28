@@ -1,0 +1,38 @@
+# robots.txt for Botifiy Marketing Website
+# https://botifiy.com/robots.txt
+
+# Allow all search engines to crawl the entire site
+User-agent: *
+Allow: /
+
+# Disallow crawling of specific paths (if needed in the future)
+# Disallow: /api/
+# Disallow: /admin/
+
+# Sitemap location - helps search engines find all pages
+Sitemap: https://botifiy.com/sitemap.xml
+
+# Crawl delay (optional) - 0 means no delay
+# Most modern bots respect this to avoid overloading servers
+Crawl-delay: 0
+
+# Special rules for specific bots (examples below)
+# You can uncomment and modify these as needed
+
+# Google bot - already respects standards
+# User-agent: Googlebot
+# Allow: /
+
+# Bing bot
+# User-agent: Bingbot
+# Allow: /
+
+# Block bad bots (uncomment if you experience issues)
+# User-agent: BadBot
+# Disallow: /
+
+# User-agent: MJ12bot
+# Disallow: /
+
+# User-agent: AhrefsBot
+# Crawl-delay: 10

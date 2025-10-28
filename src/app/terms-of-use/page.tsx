@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from "react";
+import Script from "next/script";
 import { trackViewTerms } from "@/lib/gtm";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
@@ -11,7 +12,34 @@ const TermsOfUsePage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
+    <>
+      {/* Breadcrumb Schema - Structured Data */}
+      <Script
+        id="breadcrumb-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'الرئيسية',
+                item: 'https://botifiy.com'
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'شروط الاستخدام',
+                item: 'https://botifiy.com/terms-of-use'
+              }
+            ]
+          })
+        }}
+      />
+
+      <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
       <Header />
       <main className="flex-1 container mx-auto px-4 md:px-6 py-12 md:py-16 pt-32 md:pt-32">
         <div className="prose prose-lg dark:prose-invert max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-md p-8">
@@ -230,6 +258,7 @@ const TermsOfUsePage = () => {
       </main>
       <Footer />
     </div>
+    </>
   );
 };
 

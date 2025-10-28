@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: 'شروط الاستخدام | بوتيفاي',
   description: 'اقرأ شروط وأحكام استخدام منصة بوتيفاي. يوضح هذا المستند حقوقك ومسؤولياتك كمستخدم لخدماتنا.',
   keywords: ['شروط الاستخدام', 'أحكام الخدمة', 'قواعد الاستخدام', 'بوتيفاي', 'Botifiy'],
+  alternates: {
+    canonical: 'https://botifiy.com/terms-of-use',
+  },
   openGraph: {
     title: 'شروط الاستخدام | بوتيفاي',
     description: 'اطلع على شروط استخدام منصة بوتيفاي.',
