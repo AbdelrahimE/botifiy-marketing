@@ -222,6 +222,7 @@ export default function PricingPage() {
                 '@context': 'https://schema.org',
                 '@type': 'Product',
                 name: 'بوتيفاي - بداية ذكية',
+                image: 'https://botifiy.com/images/pricing/plan-free.webp',
                 description: 'جرب أدوات بوتيفاي من غير التزام. 50 رسالة شهرياً',
                 brand: {
                   '@type': 'Brand',
@@ -246,6 +247,7 @@ export default function PricingPage() {
                 '@context': 'https://schema.org',
                 '@type': 'Product',
                 name: 'بوتيفاي - مسار الإطلاق',
+                image: 'https://botifiy.com/images/pricing/plan-launch.webp',
                 description: 'مثالية للبدايات الجادة: حملات، ردود تلقائية، تنظيم عملائك - 5,000 رسالة شهرياً',
                 brand: {
                   '@type': 'Brand',
@@ -270,6 +272,7 @@ export default function PricingPage() {
                 '@context': 'https://schema.org',
                 '@type': 'Product',
                 name: 'بوتيفاي - النمو المتسارع',
+                image: 'https://botifiy.com/images/pricing/plan-growth.webp',
                 description: 'الأفضل لو جمهورك بدأ يكبر. دردشات لحظية، حملات متعددة، وتحليلات ذكية - 30,000 رسالة شهرياً',
                 brand: {
                   '@type': 'Brand',
@@ -294,6 +297,7 @@ export default function PricingPage() {
                 '@context': 'https://schema.org',
                 '@type': 'Product',
                 name: 'بوتيفاي - الهيمنة الرقمية',
+                image: 'https://botifiy.com/images/pricing/plan-dominate.webp',
                 description: 'كل أدوات واتساب بحدود أكبر: أرقام متعددة، حملات اكثر، شات متطور، ذكاء صناعي - 100,000 رسالة شهرياً',
                 brand: {
                   '@type': 'Brand',
