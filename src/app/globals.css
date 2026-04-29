@@ -1,6 +1,34 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+/* Tailwind v4 Theme Configuration - Custom Colors */
+@theme {
+  /* Primary Brand Colors */
+  --color-primary: #60DE2E;
+  --color-primary-dark: #0B3404;
+  --color-primary-light: #E7FBD9;
+
+  /* Surface Colors */
+  --color-surface-alt: #F5FFF1;
+
+  /* Text Colors */
+  --color-text-primary: #0B3404;
+  --color-text-secondary: #325327;
+
+  /* Border Colors */
+  --color-border-custom: #DDEED4;
+
+  /* Utility Colors */
+  --color-success: #28B446;
+  --color-warning: #F7B51B;
+  --color-danger: #E04F4F;
+}
+
+/* Custom Utilities for Tailwind v4 */
+@layer utilities {
+  .max-w-container {
+    max-width: 1200px;
+  }
+}
 
 @layer base {
   :root {
@@ -61,11 +89,12 @@
 
 @layer base {
   * {
-    @apply border-border;
+    border-color: hsl(var(--border));
   }
   body {
-    @apply bg-background text-foreground;
-    font-family: 'IBM Plex Sans Arabic', 'Inter', sans-serif;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: var(--font-arabic), 'IBM Plex Sans Arabic', 'Inter', sans-serif;
   }
 }
 

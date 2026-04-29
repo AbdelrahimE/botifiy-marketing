@@ -3,10 +3,11 @@ import { IBM_Plex_Sans_Arabic } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({ 
+const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
   weight: ['300', '400', '500', '600', '700'],
   display: 'swap',
+  variable: '--font-arabic',
   fallback: ['Arial', 'sans-serif'],
   preload: true
 })
@@ -116,7 +117,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={ibmPlexSansArabic.className}>
+      <body className={ibmPlexSansArabic.variable}>
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe 

@@ -20,10 +20,7 @@ const nextConfig = {
   trailingSlash: false,
   poweredByHeader: false,
   // إضافة تحسينات للإنتاج
-  swcMinify: true,
-  compress: true,
-  // تحسين معالجة الخطوط
-  optimizeFonts: true
+  compress: true
 }
 
 module.exports = nextConfig 
