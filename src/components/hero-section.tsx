@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
-import { VideoModal } from "@/components/video-modal"
 import { Bot, CheckCircle2, Clock3, MessageCircle, PlayCircle, Rocket } from "lucide-react"
 
 type ChatMessage = {
@@ -228,7 +227,6 @@ function StatusPill({ icon, text }: { icon: "bot" | "clock"; text: string }) {
 }
 
 export function HeroSection() {
-  const [isVideoModalOpen, setIsVideoModalOpen] = useState(false)
   const [activeIndustryId, setActiveIndustryId] = useState(industryDemos[0].id)
   const [conversationStep, setConversationStep] = useState(-1)
   const activeIndustry = industryDemos.find((industry) => industry.id === activeIndustryId) ?? industryDemos[0]
@@ -262,14 +260,6 @@ export function HeroSection() {
     showConversationStep(stepIndex)
       ? "hero-chat-enter opacity-100 visible"
       : "opacity-0 invisible pointer-events-none"
-
-  const handleOpenVideoModal = () => {
-    setIsVideoModalOpen(true)
-  }
-
-  const handleCloseVideoModal = () => {
-    setIsVideoModalOpen(false)
-  }
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F0FFF4] via-white to-[#F8FFF9]">
@@ -316,13 +306,15 @@ export function HeroSection() {
               <div className="absolute inset-0 bg-gradient-to-r from-[#63dd32] to-[#4BC625] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
             <Button
-              onClick={handleOpenVideoModal}
+              asChild
               variant="outline"
               size="lg"
               className="hover:bg-primary hover:text-white text-[#4BC625] h-[52px] sm:h-10 px-4 sm:px-6 py-3 sm:py-6 text-base sm:text-xl font-bold border-2 border-[#4BC625] rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 flex items-center justify-center transform hover:scale-102 hover:-translate-y-1 relative overflow-hidden group [&_svg]:size-4 sm:[&_svg]:size-5"
             >
-              <PlayCircle aria-hidden="true" />
-              شاهد بوتيفاي وهو يعمل
+              <a href="#demo-video">
+                <PlayCircle aria-hidden="true" />
+                شاهد بوتيفاي وهو يعمل
+              </a>
             </Button>
           </div>
 
@@ -432,12 +424,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Video Modal */}
-      <VideoModal
-        isOpen={isVideoModalOpen}
-        onClose={handleCloseVideoModal}
-        videoId="x5c_wt4Mln0"
-      />
       <style>{`
         @keyframes hero-chat-message-in {
           from {

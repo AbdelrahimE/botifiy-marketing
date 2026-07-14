@@ -14,7 +14,7 @@ export function DemoVideoSection() {
   }
 
   return (
-    <section id="demo-video" className="relative overflow-hidden bg-gradient-to-br from-[#F0FFF4] via-white to-[#F8FFF9] py-12 sm:py-14">
+    <section id="demo-video" className="relative scroll-mt-20 overflow-hidden bg-gradient-to-br from-[#F0FFF4] via-white to-[#F8FFF9] py-12 sm:scroll-mt-24 sm:py-14">
       <div className="relative z-10 max-w-container mx-auto px-6">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary mb-3 leading-tight">
