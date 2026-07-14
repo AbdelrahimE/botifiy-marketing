@@ -10,11 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['IBM Plex Sans Arabic', 'Inter', 'sans-serif'],
+        sans: ['var(--font-the-year-of-handicrafts)', 'sans-serif'],
       },
       colors: {
         primary: {
-          DEFAULT: '#60DE2E',
+          DEFAULT: '#63dd32',
           dark: '#0B3404',
           light: '#E7FBD9',
         },

@@ -5,16 +5,13 @@ import Script from "next/script";
 import { trackViewHome } from "@/lib/gtm";
 import { Header } from "@/components/header"
 import { HeroSection } from "@/components/hero-section"
-import { FeaturesSection } from "@/components/features-section"
-import { HowItWorksSection } from "@/components/how-it-works-section"
-import { ToolsSection } from "@/components/tools-section"
-import { CampaignsSection } from "@/components/campaigns-section"
-import { ChatbotSection } from "@/components/chatbot-section"
-import { SentimentSection } from "@/components/sentiment-section"
-
-import { DashboardSection } from "@/components/dashboard-section"
-import { FreeTrialSection } from "@/components/free-trial-section"
-import { CtaSection } from "@/components/cta-section"
+import { DemoVideoSection } from "@/components/demo-video-section"
+import { ProblemSection } from "@/components/problem-section"
+import { CustomerJourneySection } from "@/components/customer-journey-section"
+import { UseCasesSection } from "@/components/use-cases-section"
+import { BusinessBenefitsSection } from "@/components/business-benefits-section"
+import { TrustProofSection } from "@/components/trust-proof-section"
+import { FaqSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
 
 export default function HomePage() {
@@ -54,14 +51,9 @@ export default function HomePage() {
             screenshot: 'https://botifiy.com/images/hero-section.png',
             featureList: [
               'أتمتة واتساب الذكية',
-              'شات بوت متقدم بالذكاء الاصطناعي',
-              'إدارة حملات واتساب',
-              'تحليل المشاعر بالذكاء الاصطناعي',
-              'دردشة لحظية (Live Chat)',
               'إدارة جهات الاتصال',
               'ردود تلقائية ذكية',
-              'استطلاعات آراء العملاء',
-              'تحليلات وإحصائيات متقدمة'
+              'استطلاعات آراء العملاء'
             ],
             author: {
               '@type': 'Organization',
@@ -84,15 +76,13 @@ export default function HomePage() {
       <Header />
       <main className="min-h-screen">
       <HeroSection />
-      <FeaturesSection />
-      <HowItWorksSection />
-      <CampaignsSection />
-      <ChatbotSection />
-      <ToolsSection />
-      <SentimentSection />
-      <DashboardSection />
-      <FreeTrialSection />
-      <CtaSection />
+      <DemoVideoSection />
+      <ProblemSection />
+      <CustomerJourneySection />
+      <UseCasesSection />
+      <BusinessBenefitsSection />
+      <TrustProofSection />
+      <FaqSection />
       <Footer />
       </main>
     </>

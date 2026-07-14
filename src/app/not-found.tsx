@@ -20,7 +20,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="inline-block transform rounded-2xl border-2 border-[#4BC625] bg-[#60DE2E] px-8 py-3 text-lg font-bold text-[#0B3404] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#4BC625] hover:shadow-2xl"
+          className="inline-block transform rounded-2xl border-2 border-[#4BC625] bg-[#63dd32] px-8 py-3 text-lg font-bold text-[#0B3404] shadow-lg transition-all duration-300 hover:scale-105 hover:bg-[#4BC625] hover:shadow-2xl"
         >
           العودة إلى الصفحة الرئيسية
         </Link>

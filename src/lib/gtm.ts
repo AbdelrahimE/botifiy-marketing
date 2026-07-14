@@ -10,28 +10,6 @@ declare global {
   }
   
   /**
-   * دالة لإرسال حدث view_pricing إلى dataLayer
-   */
-  export const trackViewPricing = () => {
-    try {
-      if (typeof window === 'undefined') {
-        return;
-      }
-      
-      if (!window.dataLayer) {
-        window.dataLayer = [];
-      }
-      
-      window.dataLayer.push({
-        event: 'view_pricing'
-      });
-      
-    } catch {
-      // Silent error handling
-    }
-  };
-  
-  /**
    * دالة لإرسال حدث view_home إلى dataLayer
    */
   export const trackViewHome = () => {
@@ -89,10 +67,9 @@ declare global {
   };
   
   /**
-   * دالة لإرسال حدث click_signup إلى dataLayer
-   * @param location - اسم القسم أو المكان الذي يوجد به زر CTA
+   * تسجيل الضغط على زر التفعيل الموجود داخل قائمة الموبايل.
    */
-  export const trackClickSignup = (location: string) => {
+  export const trackActivationClick = () => {
     try {
       if (typeof window === 'undefined') {
         return;
@@ -100,37 +77,8 @@ declare global {
       
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
-        event: 'click_signup',
-        location
-      });
-      
-    } catch {
-      // Silent error handling
-    }
-  };
-  
-  /**
-   * دالة لإرسال حدث click_plan إلى dataLayer
-   * @param plan_name - اسم الخطة
-   * @param billing_period - فترة الفوترة (شهري/سنوي)
-   * @param location - اسم القسم أو المكان الذي يوجد به زر الخطة
-   */
-  export const trackClickPlan = (
-    plan_name: string,
-    billing_period: 'monthly' | 'yearly',
-    location: string
-  ) => {
-    try {
-      if (typeof window === 'undefined') {
-        return;
-      }
-      
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        event: 'click_plan',
-        plan_name,
-        billing_period,
-        location
+        event: 'click_activation',
+        location: 'header-mobile'
       });
       
     } catch {

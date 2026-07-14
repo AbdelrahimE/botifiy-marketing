@@ -39,24 +39,27 @@ const TermsOfUsePage = () => {
         }}
       />
 
-      <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="legal-page flex min-h-screen flex-col">
       <Header />
-      <main className="flex-1 container mx-auto px-4 md:px-6 py-12 md:py-16 pt-32 md:pt-32">
-        <div className="prose prose-lg dark:prose-invert max-w-5xl mx-auto bg-white dark:bg-gray-800 rounded-3xl shadow-md p-8">
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 text-center text-primary-dark dark:text-white">
+      <main className="legal-main flex-1 px-4 md:px-6">
+        <article className="legal-document mx-auto max-w-5xl">
+          <header className="legal-document-header">
+          <span className="legal-eyebrow">الشروط والأحكام</span>
+          <h1 className="legal-title">
             شروط الاستخدام لمنصة بوتيفاي
           </h1>
-          <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-8">
+          <p className="legal-updated-at">
              آخر تحديث: 7 يوليو 2025
           </p>
-          <p className="text-right bg-yellow-100 dark:bg-yellow-900/20 text-yellow-800 dark:text-yellow-200 p-4 rounded-lg mb-8">
+          </header>
+          <p className="legal-intro">
             مرحبًا بك في بوتيفاي! باستخدامك لمنصتنا، فإنك توافق على الالتزام
             بهذه الشروط. يرجى قراءتها بعناية، وفي حال لم توافق عليها، يجب عليك
             التوقف عن استخدام المنصة فورًا.
           </p>
-          <hr className="my-8" />
+          <hr />
 
-          <div className="space-y-8">
+          <div className="legal-content">
             <div>
               <h2 className="text-2xl font-semibold mb-4">1. من نحن؟</h2>
               <p>
@@ -181,7 +184,7 @@ const TermsOfUsePage = () => {
               </h2>
               <ul className="space-y-2 list-disc list-inside">
                 <li>
-                  جميع الخطط والرسوم موضحة في صفحة التسعير. تحتسب الرسوم
+                  تُعرض جميع الخطط والرسوم بوضوح قبل الاشتراك. تحتسب الرسوم
                   شهريًا أو سنويًا حسب اختيارك.
                 </li>
                 <li>
@@ -248,13 +251,13 @@ const TermsOfUsePage = () => {
               </ul>
             </div>
             <hr className="my-8" />
-            <p className="text-right font-semibold text-gray-800 dark:text-white">
+            <p className="legal-closing">
               باستخدامك لمنصة بوتيفاي، فإنك توافق على هذه الشروط وتلتزم بها.
               نُقدّر ثقتك بنا ونعمل باستمرار على تحسين الخدمة بما يحقق لك أفضل
               تجربة استخدام.
             </p>
           </div>
-        </div>
+        </article>
       </main>
       <Footer />
     </div>

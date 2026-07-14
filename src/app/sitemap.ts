@@ -31,14 +31,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
 
-    // Pricing Page - High priority, updated weekly
-    {
-      url: `${baseUrl}/pricing`,
-      lastModified: currentDate,
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-
     // Privacy Policy - Low priority, rarely updated
     {
       url: `${baseUrl}/privacy-policy`,

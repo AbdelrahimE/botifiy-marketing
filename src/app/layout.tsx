@@ -1,15 +1,39 @@
 import type { Metadata } from 'next'
-import { IBM_Plex_Sans_Arabic } from 'next/font/google'
+import localFont from 'next/font/local'
 import Script from 'next/script'
 import './globals.css'
 
-const ibmPlexSansArabic = IBM_Plex_Sans_Arabic({
-  subsets: ['arabic'],
-  weight: ['300', '400', '500', '600', '700'],
+const theYearOfHandicrafts = localFont({
+  src: [
+    {
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Regular.otf',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Medium.otf',
+      weight: '500',
+      style: 'normal',
+    },
+    {
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-SemiBold.otf',
+      weight: '600',
+      style: 'normal',
+    },
+    {
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Bold.otf',
+      weight: '700',
+      style: 'normal',
+    },
+    {
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Black.otf',
+      weight: '900',
+      style: 'normal',
+    },
+  ],
   display: 'swap',
-  variable: '--font-arabic',
-  fallback: ['Arial', 'sans-serif'],
-  preload: true
+  variable: '--font-the-year-of-handicrafts',
+  preload: true,
 })
 
 export const metadata: Metadata = {
@@ -58,19 +82,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="ar" dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <head>
-        <link
-          rel="preconnect"
-          href="https://fonts.googleapis.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
@@ -117,17 +130,20 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={ibmPlexSansArabic.variable}>
+      <body
+        className={`${theYearOfHandicrafts.className} ${theYearOfHandicrafts.variable}`}
+        suppressHydrationWarning
+      >
         {/* Google Tag Manager (noscript) */}
         <noscript>
-          <iframe 
+          <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-5WFNXVRS"
-            height="0" 
-            width="0" 
-            style={{display:'none',visibility:'hidden'}}
+            height="0"
+            width="0"
+            style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        
+
         {children}
       </body>
     </html>

@@ -1,20 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  allowedDevOrigins: ['192.168.1.8'],
   experimental: {
     optimizePackageImports: ['lucide-react']
   },
   images: {
     unoptimized: false,
-    // إضافة دعم أفضل للصور في الإنتاج
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**',
+        hostname: 'botifiy.com',
+        pathname: '/images/**',
       },
-      {
-        protocol: 'http',
-        hostname: 'localhost',
-      }
     ]
   },
   trailingSlash: false,
@@ -23,4 +20,4 @@ const nextConfig = {
   compress: true
 }
 
-module.exports = nextConfig 
+module.exports = nextConfig
