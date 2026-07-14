@@ -7,6 +7,20 @@ import { saveLead } from "@/lib/supabase-leads"
 export const runtime = "nodejs"
 
 const MAX_BODY_SIZE = 12_000
+const PRODUCTION_ORIGINS = new Set([
+  "https://botifiy.com",
+  "https://www.botifiy.com",
+])
+
+function isAllowedOrigin(request: NextRequest, origin: string | null) {
+  if (!origin) return true
+
+  if (process.env.NODE_ENV === "production") {
+    return PRODUCTION_ORIGINS.has(origin)
+  }
+
+  return origin === request.nextUrl.origin
+}
 
 function getClientIp(request: NextRequest) {
   const forwardedFor = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim()
@@ -35,7 +49,7 @@ export async function POST(request: NextRequest) {
   }
 
   const origin = request.headers.get("origin")
-  if (origin && origin !== request.nextUrl.origin) {
+  if (!isAllowedOrigin(request, origin)) {
     logLeadEvent("warn", "origin_rejected", { requestId, origin })
     return NextResponse.json({ ok: false, message: "تعذر إرسال الطلب." }, { status: 403 })
   }
@@ -106,4 +120,3 @@ export async function POST(request: NextRequest) {
     )
   }
 }
-
