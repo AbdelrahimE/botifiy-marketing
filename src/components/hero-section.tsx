@@ -361,7 +361,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="min-h-[470px] bg-[#44C411] bg-[url('/images/whatsapp-real-bg.png')] bg-cover bg-center px-4 py-3 sm:min-h-[430px]">
+                <div className="min-h-[470px] bg-[#44C411] bg-[url('/images/whatsapp-real-bg.webp')] bg-cover bg-center px-4 py-3 sm:min-h-[430px]">
                   <div
                     key={activeIndustry.id}
                     className="hero-chat-content-swap space-y-1.5"
