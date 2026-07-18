@@ -146,7 +146,7 @@ html {
   line-height: 1.6;
 }
 
-.activation-label > span {
+.activation-label>span {
   color: #d63232;
 }
 
@@ -295,6 +295,7 @@ html {
     opacity: 0;
     transform: translateY(18px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -569,7 +570,7 @@ html {
   overflow: hidden;
   padding: clamp(14px, 2.5vh, 28px);
   background-color: #237114;
-  background-image: url("/images/whatsapp-mockup/botifiy-mesh-gradient.png");
+  background-image: url("/images/whatsapp-mockup/botifiy-mesh-gradient.webp");
   background-position: center;
   background-size: 100% 100%;
   background-repeat: no-repeat;

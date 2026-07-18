@@ -48,7 +48,7 @@ export default function HomePage() {
             },
             description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي. كل أدوات واتساب اللي تحتاجها لإدارة شغلك بذكاء في مكان واحد.',
             url: 'https://botifiy.com',
-            screenshot: 'https://botifiy.com/images/hero-section.png',
+            screenshot: 'https://botifiy.com/images/hero-section.webp',
             featureList: [
               'أتمتة واتساب الذكية',
               'إدارة جهات الاتصال',
@@ -75,15 +75,15 @@ export default function HomePage() {
 
       <Header />
       <main className="min-h-screen">
-      <HeroSection />
-      <DemoVideoSection />
-      <ProblemSection />
-      <CustomerJourneySection />
-      <UseCasesSection />
-      <BusinessBenefitsSection />
-      <TrustProofSection />
-      <FaqSection />
-      <Footer />
+        <HeroSection />
+        <DemoVideoSection />
+        <ProblemSection />
+        <CustomerJourneySection />
+        <UseCasesSection />
+        <BusinessBenefitsSection />
+        <TrustProofSection />
+        <FaqSection />
+        <Footer />
       </main>
     </>
   )

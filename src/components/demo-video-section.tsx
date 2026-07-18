@@ -43,7 +43,7 @@ export function DemoVideoSection() {
                   aria-label="تشغيل الفيديو التعريفي — أقل من دقيقة"
                 >
                   <Image
-                    src="/images/hero-section.png"
+                    src="/images/hero-section.webp"
                     alt="معاينة لواجهة منصة بوتيفاي"
                     fill
                     priority={false}

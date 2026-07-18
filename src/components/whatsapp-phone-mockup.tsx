@@ -25,20 +25,20 @@ type IconName = "shopping" | "restaurant" | "clinic" | "spa" | "academy"
 
 export type WhatsAppConversationEvent =
   | {
-      type: "customer" | "business"
-      text: string | string[]
-      time: string
-      read?: boolean
-      options?: string[]
-    }
+    type: "customer" | "business"
+    text: string | string[]
+    time: string
+    read?: boolean
+    options?: string[]
+  }
   | {
-      type: "typing"
-    }
+    type: "typing"
+  }
   | {
-      type: "label"
-      text: string
-      tone?: "intent" | "danger" | "success"
-    }
+    type: "label"
+    text: string
+    tone?: "intent" | "danger" | "success"
+  }
 
 export type WhatsAppConversationScenario = {
   id: string
@@ -181,7 +181,7 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
 
       <div className="wa-phone" aria-label="محادثة واتساب تجريبية داخل هاتف آيفون">
         <Image
-          src="/images/whatsapp-mockup/iphone-xs-max-space-grey.png"
+          src="/images/whatsapp-mockup/iphone-xs-max-space-grey.webp"
           alt=""
           fill
           priority
@@ -227,7 +227,7 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
 
           <div className="wa-chat-wallpaper">
             <Image
-              src="/images/whatsapp-mockup/whatsapp-chat-bg.png"
+              src="/images/whatsapp-mockup/whatsapp-chat-bg.webp"
               alt=""
               fill
               sizes="(max-width: 640px) 80vw, 360px"
