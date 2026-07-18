@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     siteName: 'بوتيفاي',
     images: [
       {
-        url: '/botifiy-social.png',
+        url: '/botifiy-social.webp',
         width: 600,
         height: 315,
         alt: 'بوتيفاي - شروط الاستخدام',
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'شروط الاستخدام | بوتيفاي',
     description: 'اطلع على شروط استخدام منصة بوتيفاي.',
-    images: ['/botifiy-social.png'],
+    images: ['/botifiy-social.webp'],
   }
 }
 

@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     siteName: 'بوتيفاي',
     images: [
       {
-        url: '/botifiy-social.png',
+        url: '/botifiy-social.webp',
         width: 600,
         height: 315,
         alt: 'بوتيفاي - أتمتة وتسويق واتساب بالذكاء الاصطناعي',
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
     description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
-    images: ['/botifiy-social.png'],
+    images: ['/botifiy-social.webp'],
   },
   icons: {
     icon: '/favicon.ico',
@@ -110,7 +110,7 @@ export default function RootLayout({
               name: 'بوتيفاي',
               alternateName: 'Botifiy',
               url: 'https://botifiy.com',
-              logo: 'https://botifiy.com/botifiy-social.png',
+              logo: 'https://botifiy.com/botifiy-social.webp',
               description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
               foundingDate: '2023',
               slogan: 'سيطر على كل تواصلات واتساب من مكان واحد وبذكاء غير مسبوق',

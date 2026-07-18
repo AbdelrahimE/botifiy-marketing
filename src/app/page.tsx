@@ -66,7 +66,7 @@ export default function HomePage() {
               url: 'https://botifiy.com',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://botifiy.com/botifiy-social.png'
+                url: 'https://botifiy.com/botifiy-social.webp'
               }
             }
           })
