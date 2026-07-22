@@ -33,14 +33,13 @@ const theYearOfHandicrafts = localFont({
   ],
   display: 'swap',
   variable: '--font-the-year-of-handicrafts',
-  preload: true,
+  preload: false,
 })
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://botifiy.com'),
-  title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
-  description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
-  keywords: ['WhatsApp', 'automation', 'chatbot', 'customer service', 'AI', 'sentiment analysis'],
+  title: 'رد تلقائي على واتساب ومتابعة العملاء | بوتيفاي',
+  description: 'بوتيفاي يوفر ردًا تلقائيًا على واتساب، مع تصنيف العملاء ومتابعتهم تلقائيًا لتحويل المحادثات إلى مبيعات.',
   authors: [{ name: 'Botifiy' }],
   alternates: {
     canonical: 'https://botifiy.com',
@@ -50,25 +49,26 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
-    description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
+    title: 'بوتيفاي — حوّل واتساب إلى موظف مبيعات ذكي',
+    description: 'ردود تلقائية فورية، تصنيف للعملاء ومتابعات تلقائية تساعدك على تحويل محادثات واتساب إلى مبيعات.',
     type: 'website',
-    locale: 'ar',
+    locale: 'ar_EG',
     url: 'https://botifiy.com',
     siteName: 'بوتيفاي',
     images: [
       {
         url: '/botifiy-social.webp',
-        width: 600,
-        height: 315,
-        alt: 'بوتيفاي - أتمتة وتسويق واتساب بالذكاء الاصطناعي',
+        width: 1920,
+        height: 1080,
+        alt: 'بوتيفاي — حوّل واتساب إلى موظف مبيعات ذكي',
+        type: 'image/webp',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'بوتيفاي | أتمتة وتسويق واتساب بالذكاء الاصطناعي',
-    description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
+    title: 'بوتيفاي — حوّل واتساب إلى موظف مبيعات ذكي',
+    description: 'ردود تلقائية فورية، تصنيف للعملاء ومتابعات تلقائية تساعدك على تحويل محادثات واتساب إلى مبيعات.',
     images: ['/botifiy-social.webp'],
   },
   icons: {
@@ -110,8 +110,8 @@ export default function RootLayout({
               name: 'بوتيفاي',
               alternateName: 'Botifiy',
               url: 'https://botifiy.com',
-              logo: 'https://botifiy.com/botifiy-social.webp',
-              description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي',
+              logo: 'https://botifiy.com/images/botifiy-logo-ar.png',
+              description: 'ردود تلقائية فورية، تصنيف للعملاء ومتابعات تلقائية تساعدك على تحويل محادثات واتساب إلى مبيعات.',
               foundingDate: '2023',
               slogan: 'سيطر على كل تواصلات واتساب من مكان واحد وبذكاء غير مسبوق',
               contactPoint: {
@@ -121,7 +121,6 @@ export default function RootLayout({
                 availableLanguage: ['ar', 'Arabic'],
                 areaServed: ['EG', 'SA', 'AE', 'KW', 'QA', 'BH', 'OM', 'JO', 'LB', 'IQ', 'MA', 'DZ', 'TN', 'LY', 'SD', 'YE', 'SY', 'PS']
               },
-              sameAs: [],
               address: {
                 '@type': 'PostalAddress',
                 addressCountry: 'EG'

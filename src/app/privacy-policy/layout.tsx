@@ -11,15 +11,16 @@ export const metadata: Metadata = {
     title: 'سياسة الخصوصية | بوتيفاي',
     description: 'تعرف على كيفية حماية بوتيفاي لبياناتك.',
     type: 'website',
-    locale: 'ar',
+    locale: 'ar_EG',
     url: 'https://botifiy.com/privacy-policy',
     siteName: 'بوتيفاي',
     images: [
       {
         url: '/botifiy-social.webp',
-        width: 600,
-        height: 315,
-        alt: 'بوتيفاي - سياسة الخصوصية',
+        width: 1920,
+        height: 1080,
+        alt: 'بوتيفاي — حوّل واتساب إلى موظف مبيعات ذكي',
+        type: 'image/webp',
       },
     ],
   },
@@ -37,4 +38,4 @@ export default function PrivacyPolicyLayout({
   children: React.ReactNode
 }) {
   return children
-} 
+}

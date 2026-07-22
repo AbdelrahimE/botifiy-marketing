@@ -249,7 +249,7 @@ export function ActivationForm({ initialCountry, selectedPlan, source }: Activat
             }}
           />
           <p className="mt-1.5 text-xs leading-5 text-text-secondary/75">
-            كود الدولة بيتضاف تلقائياً، وهنستخدم الرقم للتواصل معاك على واتساب فقط.
+            كود الدولة بيتضاف تلقائيًا، وهنستخدم الرقم للتواصل معاك على واتساب فقط.
           </p>
           {errors.whatsapp && <p id="whatsapp-error" className="activation-error">{errors.whatsapp}</p>}
         </div>

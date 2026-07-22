@@ -35,22 +35,16 @@ export default function HomePage() {
             operatingSystem: 'Web',
             offers: {
               '@type': 'Offer',
-              price: '0',
+              price: '10',
               priceCurrency: 'USD',
-              description: 'ابدأ مجاناً بـ 50 رسالة شهرياً'
+              url: 'https://botifiy.com/#pricing',
+              description: 'تبدأ خطط بوتيفاي من 10 دولارات شهريًا'
             },
-            aggregateRating: {
-              '@type': 'AggregateRating',
-              ratingValue: '4.8',
-              ratingCount: '600',
-              bestRating: '5',
-              worstRating: '1'
-            },
-            description: 'حوّل المحادثات إلى نمو مع أتمتة واتساب ورؤى ذكاء اصطناعي. كل أدوات واتساب اللي تحتاجها لإدارة شغلك بذكاء في مكان واحد.',
+            description: 'رد تلقائي على واتساب مع تصنيف العملاء ومتابعتهم تلقائيًا لتحويل المحادثات إلى مبيعات.',
             url: 'https://botifiy.com',
             screenshot: 'https://botifiy.com/images/hero-section.webp',
             featureList: [
-              'أتمتة واتساب الذكية',
+              'رد تلقائي على واتساب',
               'إدارة جهات الاتصال',
               'ردود تلقائية ذكية',
               'استطلاعات آراء العملاء'
@@ -66,7 +60,7 @@ export default function HomePage() {
               url: 'https://botifiy.com',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://botifiy.com/botifiy-social.webp'
+                url: 'https://botifiy.com/images/botifiy-logo-ar.png'
               }
             }
           })

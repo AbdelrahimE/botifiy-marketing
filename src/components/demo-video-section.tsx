@@ -21,7 +21,7 @@ export function DemoVideoSection() {
             شاهد كيف تتحول محادثة واتساب إلى رحلة بيع كاملة
           </h2>
           <p className="text-base md:text-xl text-text-secondary leading-relaxed mb-6">
-            في أقل من دقيقة، شاهد كيف يفهم بوتيفاي نية العميل، يعرض له الخيارات المناسبة، ثم يتابعه تلقائياً داخل واتساب.
+            في أقل من دقيقة، شاهد كيف يفهم بوتيفاي نية العميل، يعرض له الخيارات المناسبة، ثم يتابعه تلقائيًا داخل واتساب.
           </p>
 
           <div className="relative mx-auto max-w-[860px] overflow-hidden rounded-2xl border-2 border-primary bg-primary-dark shadow-lg shadow-primary/30 drop-shadow-md transition-all duration-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary/25">

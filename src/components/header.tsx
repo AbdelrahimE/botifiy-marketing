@@ -92,6 +92,9 @@ export function Header() {
             {/* Mobile Menu Toggle */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label={isMenuOpen ? "إغلاق قائمة التنقل" : "فتح قائمة التنقل"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
               className="md:hidden p-2 text-gray-700 hover:text-[#63dd32] transition-colors duration-200"
             >
               {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -101,7 +104,7 @@ export function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
+          <div id="mobile-navigation" className="md:hidden mt-4 pb-4 border-t border-gray-200">
             <nav className="flex flex-col gap-4 pt-4">
               {navigationItems.map((item) => (
                 <Link

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Bot, CheckCircle2, Clock3, MessageCircle, PlayCircle, Rocket } from "lucide-react"
 
@@ -47,7 +48,7 @@ const industryDemos: IndustryDemo[] = [
       },
       {
         sender: "bot",
-        lines: ["السعر 649 جنيه والتوصيل مجاني لأول 100 عميل 🎉"],
+        lines: ["السعر 15 دولارًا والتوصيل مجاني لأول 100 عميل 🎉"],
       },
     ],
     followUps: [
@@ -62,7 +63,7 @@ const industryDemos: IndustryDemo[] = [
     statusBadges: {
       ai: "بوتيفاي بعتله الخيارات المتاحة بسرعة",
       followUp: "ولما مردش بعتله رسالة متابعة بعد شوية",
-      footer: "أنت تكتب رسائل البيع، وبوتيفاي يرد ويتابع المهتمين تلقائياً.",
+      footer: "أنت تكتب رسائل البيع، وبوتيفاي يرد ويتابع المهتمين تلقائيًا.",
     },
   },
   {
@@ -88,7 +89,7 @@ const industryDemos: IndustryDemo[] = [
       },
       {
         sender: "bot",
-        lines: ["تبدأ الجلسات من 350 ريال حسب المنطقة."],
+        lines: ["تبدأ الجلسات من 10 دولارات حسب المنطقة."],
       },
     ],
     followUps: [
@@ -101,9 +102,9 @@ const industryDemos: IndustryDemo[] = [
       },
     ],
     statusBadges: {
-      ai: "بوتيفاي ارسل الخيارات عشان يسهل علي العميل",
+      ai: "بوتيفاي أرسل الخيارات عشان يسهّل على العميل",
       followUp: "ولما مردش بعتله متابعة حجز موعد بعد شوية",
-      footer: "أنت تكتب رسائل الحجز، وبوتيفاي يرد ويتابع المهتمين تلقائياً.",
+      footer: "أنت تكتب رسائل الحجز، وبوتيفاي يرد ويتابع المهتمين تلقائيًا.",
     },
   },
   {
@@ -129,7 +130,7 @@ const industryDemos: IndustryDemo[] = [
       },
       {
         sender: "bot",
-        lines: ["سعر الكورس 499 جنيه، والدفع متاح على دفعتين."],
+        lines: ["سعر الكورس 12 دولارًا، والدفع متاح على دفعتين."],
       },
     ],
     followUps: [
@@ -144,7 +145,7 @@ const industryDemos: IndustryDemo[] = [
     statusBadges: {
       ai: "بوتيفاي بعتله الخيارات المتاحة بسرعة",
       followUp: "كمان بعتله رسالة متابعة تلقائية بعد شوية",
-      footer: "أنت تكتب رسائل التسجيل، وبوتيفاي يرد ويتابع المهتمين تلقائياً.",
+      footer: "أنت تكتب رسائل التسجيل، وبوتيفاي يرد ويتابع المهتمين تلقائيًا.",
     },
   },
 ]
@@ -277,7 +278,7 @@ export function HeroSection() {
           <div className="relative inline-flex max-w-[calc(100vw-3rem)] items-center justify-center gap-2 overflow-hidden rounded-full border border-[#E3B23C]/45 bg-[linear-gradient(135deg,#FFF8D8_0%,#F7D56A_36%,#D99B1E_68%,#FFECA3_100%)] px-4 py-2 mb-6 text-center text-sm font-semibold leading-relaxed text-[#4B3000]">
             <span className="absolute inset-0 bg-[radial-gradient(circle_at_20%_15%,rgba(255,255,255,0.85),transparent_28%),linear-gradient(90deg,transparent,rgba(255,255,255,0.38),transparent)] opacity-80" aria-hidden="true"></span>
             <span className="relative z-10">
-              أتمتة واتساب مصممة للسوق العربي
+              رد تلقائي على واتساب مصمم للسوق العربي
             </span>
           </div>
 
@@ -286,13 +287,13 @@ export function HeroSection() {
             className="text-3xl md:text-4xl lg:text-5xl font-bold text-text-primary mb-6 leading-snug max-w-4xl mx-auto"
             style={{ lineHeight: '1.5' }}
           >
-            <span className="block">مش قادر ترد على كله بسرعة ؟</span>
-            <span className="block text-primary">بوتيفاي يرد ويتابع عميلك تلقائيـــاً حتي وانت نايم</span>
+            <span className="block">مش قادر ترد على عميلك بسرعة ؟</span>
+            <span className="block text-primary">بوتيفاي يرد تلقائيــاً ويتابع عميلك حتى وإنت نايــــم</span>
           </h1>
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-text-secondary max-w-3xl mx-auto mb-6 leading-relaxed">
-            شات بوت ذكي بيفهم عميلك ويرد عنك، ويبعتله كمان رسائل متابعة تلقائية لحد ما يشتري — بدون كود، بدون خبرة، كل ده بـ 10 دولار بس في الشهر.
+            بوتيفاي يوفر ردًا تلقائيًا على واتساب يفهم سؤال عميلك ويرد فورًا، ويبعتله رسائل متابعة تلقائية لحد ما يشتري — بدون كود أو خبرة، وكل ده بداية من 10 دولارات في الشهر.
           </p>
 
           {/* CTA Buttons */}
@@ -361,10 +362,20 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                <div className="min-h-[470px] bg-[#44C411] bg-[url('/images/whatsapp-real-bg.webp')] bg-cover bg-center px-4 py-3 sm:min-h-[430px]">
+                <div className="relative min-h-[470px] overflow-hidden bg-[#44C411] px-4 py-3 sm:min-h-[430px]">
+                  <Image
+                    src="/images/whatsapp-real-bg.webp"
+                    alt=""
+                    fill
+                    preload
+                    fetchPriority="high"
+                    sizes="(max-width: 896px) calc(100vw - 52px), 896px"
+                    className="object-cover object-center"
+                    aria-hidden="true"
+                  />
                   <div
                     key={activeIndustry.id}
-                    className="hero-chat-content-swap space-y-1.5"
+                    className="hero-chat-content-swap relative z-10 space-y-1.5"
                     aria-live="polite"
                   >
                     <div className={conversationStepClass(0)}>

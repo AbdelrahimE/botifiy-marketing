@@ -52,7 +52,7 @@ const defaultScenario: WhatsAppConversationScenario = {
   contactName: "متجر الأقصي",
   avatar: "shopping",
   events: [
-    { type: "customer", text: "السلام عليكم .. المكنسة دي متوفرة ؟", time: "9:41" },
+    { type: "customer", text: "السلام عليكم.. المكنسة دي متوفرة؟", time: "9:41" },
     { type: "label", tone: "intent", text: "بوتيفاي فهم نية العميل وبعتله الرد الجاهز" },
     { type: "typing" },
     {
@@ -66,7 +66,7 @@ const defaultScenario: WhatsAppConversationScenario = {
     { type: "typing" },
     {
       type: "business",
-      text: "السعر 1149 جنيه + توصيل مجاني 🎉\nاكتب الاسم والعنوان عشان أجهز لك الطلب.",
+      text: "السعر 15 دولارًا + توصيل مجاني 🎉\nاكتب الاسم والعنوان عشان أجهز لك الطلب.",
       time: "9:42",
       read: true,
     },

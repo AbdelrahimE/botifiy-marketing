@@ -11,15 +11,16 @@ export const metadata: Metadata = {
     title: 'شروط الاستخدام | بوتيفاي',
     description: 'اطلع على شروط استخدام منصة بوتيفاي.',
     type: 'website',
-    locale: 'ar',
+    locale: 'ar_EG',
     url: 'https://botifiy.com/terms-of-use',
     siteName: 'بوتيفاي',
     images: [
       {
         url: '/botifiy-social.webp',
-        width: 600,
-        height: 315,
-        alt: 'بوتيفاي - شروط الاستخدام',
+        width: 1920,
+        height: 1080,
+        alt: 'بوتيفاي — حوّل واتساب إلى موظف مبيعات ذكي',
+        type: 'image/webp',
       },
     ],
   },
@@ -37,4 +38,4 @@ export default function TermsOfUseLayout({
   children: React.ReactNode
 }) {
   return children
-} 
+}

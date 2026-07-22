@@ -129,7 +129,7 @@ const PrivacyPolicyPage = () => {
               </h2>
               <ol className="space-y-2 list-decimal list-inside">
                 <li>
-                  <strong>تقديم الخدمة:</strong> تشغيل الشات بوت، الحملات،
+                  <strong>تقديم الخدمة:</strong> تشغيل الردود التلقائية، الحملات،
                   التحليلات، وخدمات الأتمتة.
                 </li>
                 <li>
