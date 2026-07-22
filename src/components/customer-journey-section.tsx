@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useRef } from "react"
 import Image from "next/image"
 import { ArrowLeft, PlayCircle, Sparkles } from "lucide-react"
 
@@ -50,32 +47,8 @@ const journeySteps = [
 ]
 
 export function CustomerJourneySection() {
-  const sectionRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const items = section.querySelectorAll<HTMLElement>("[data-journey-reveal]")
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("journey-reveal-visible")
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.16, rootMargin: "0px 0px -7% 0px" }
-    )
-
-    items.forEach((item) => observer.observe(item))
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <section
-      ref={sectionRef}
       id="customer-journey"
       dir="rtl"
       className="relative scroll-mt-20 overflow-hidden bg-[#041108] py-20 text-white sm:scroll-mt-24 sm:py-24 lg:py-28"

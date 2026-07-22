@@ -6,28 +6,18 @@ import './globals.css'
 const theYearOfHandicrafts = localFont({
   src: [
     {
-      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Regular.otf',
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Regular.woff2',
       weight: '400',
       style: 'normal',
     },
     {
-      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Medium.otf',
-      weight: '500',
-      style: 'normal',
-    },
-    {
-      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-SemiBold.otf',
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-SemiBold.woff2',
       weight: '600',
       style: 'normal',
     },
     {
-      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Bold.otf',
+      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Bold.woff2',
       weight: '700',
-      style: 'normal',
-    },
-    {
-      path: '../../TheYearofHandicrafts/TheYearofHandicrafts-Black.otf',
-      weight: '900',
       style: 'normal',
     },
   ],
@@ -87,7 +77,7 @@ export default function RootLayout({
         {/* Google Tag Manager */}
         <Script
           id="gtm-script"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':

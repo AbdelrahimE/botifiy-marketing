@@ -2,7 +2,8 @@
 const nextConfig = {
   allowedDevOrigins: ['192.168.1.8'],
   experimental: {
-    optimizePackageImports: ['lucide-react']
+    optimizePackageImports: ['lucide-react'],
+    inlineCss: true
   },
   images: {
     unoptimized: false,

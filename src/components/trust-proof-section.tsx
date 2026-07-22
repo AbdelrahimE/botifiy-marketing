@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import useEmblaCarousel from "embla-carousel-react"
 import Autoplay from "embla-carousel-autoplay"
 import Image from "next/image"
@@ -232,32 +232,63 @@ function ReviewCard({ review }: { review: CustomerReview }) {
   )
 }
 
-function FeatureInfo({ description, id }: { description: string; id: string }) {
+function FeatureInfo({
+  description,
+  label,
+  id,
+  isOpen,
+  onOpen,
+  onClose,
+}: {
+  description: string
+  label: string
+  id: string
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+}) {
   return (
-    <span className="relative inline-flex shrink-0">
+    <span
+      className="relative inline-flex shrink-0"
+      onMouseEnter={onOpen}
+      onMouseLeave={onClose}
+    >
       <button
         type="button"
-        aria-label="مزيد من المعلومات عن هذه الميزة"
-        aria-describedby={id}
-        className="peer grid h-4 w-4 place-items-center text-primary-dark/60 transition-colors hover:text-primary focus:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
+        aria-label={`تفاصيل ${label}`}
+        aria-describedby={isOpen ? id : undefined}
+        aria-expanded={isOpen}
+        onClick={onOpen}
+        onFocus={onOpen}
+        onBlur={onClose}
+        onKeyDown={(event) => {
+          if (event.key === "Escape") {
+            onClose()
+            event.currentTarget.blur()
+          }
+        }}
+        className="grid h-4 w-4 place-items-center text-primary-dark/60 transition-colors hover:text-primary focus:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
       >
         <Info className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
       </button>
 
-      <span
-        id={id}
-        role="tooltip"
-        className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 translate-y-1 rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-right text-xs font-normal leading-6 text-primary-dark opacity-0 shadow-[0_12px_30px_rgba(11,52,4,0.16)] transition-all duration-200 peer-hover:translate-y-0 peer-hover:opacity-100 peer-focus:translate-y-0 peer-focus:opacity-100"
-      >
-        {description}
-        <span className="absolute left-1/2 top-full h-2 w-2 -translate-x-1/2 -translate-y-1 rotate-45 border-b border-r border-gray-200 bg-gray-100" aria-hidden="true" />
-      </span>
+      {isOpen && (
+        <span
+          id={id}
+          role="tooltip"
+          className="pointer-events-none absolute bottom-full left-1/2 z-50 mb-2 w-64 -translate-x-1/2 rounded-xl border border-gray-200 bg-gray-100 px-4 py-3 text-right text-xs font-normal leading-6 text-primary-dark opacity-100 shadow-[0_12px_30px_rgba(11,52,4,0.16)]"
+        >
+          {description}
+          <span className="absolute left-1/2 top-full h-2 w-2 -translate-x-1/2 -translate-y-1 rotate-45 border-b border-r border-gray-200 bg-gray-100" aria-hidden="true" />
+        </span>
+      )}
     </span>
   )
 }
 
 function PricingPlanCard({ plan }: { plan: PricingPlan }) {
   const isFeatured = plan.featured === true
+  const [activeFeature, setActiveFeature] = useState<number | null>(null)
 
   return (
     <Card
@@ -326,14 +357,19 @@ function PricingPlanCard({ plan }: { plan: PricingPlan }) {
                       ? "bg-primary-dark text-primary"
                       : "bg-primary-light text-primary-dark"
                       }`}
+                    aria-hidden="true"
                   >
-                    <Icon className="h-3.5 w-3.5" aria-hidden="true" />
+                    <Icon className="h-3.5 w-3.5" strokeWidth={2.25} aria-hidden="true" />
                   </span>
                   <span className="inline-flex min-w-0 items-center gap-1.5">
                     <span className="text-sm leading-6 text-primary-dark/80">{feature.text}</span>
                     <FeatureInfo
                       id={`home-pricing-${plan.id}-feature-${featureIndex}`}
                       description={feature.description}
+                      label={feature.text}
+                      isOpen={activeFeature === featureIndex}
+                      onOpen={() => setActiveFeature(featureIndex)}
+                      onClose={() => setActiveFeature(null)}
                     />
                   </span>
                 </li>
@@ -347,6 +383,8 @@ function PricingPlanCard({ plan }: { plan: PricingPlan }) {
 }
 
 export function TrustProofSection() {
+  const reviewsGateRef = useRef<HTMLDivElement>(null)
+  const [reviewsReady, setReviewsReady] = useState(false)
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
       align: "start",
@@ -366,6 +404,28 @@ export function TrustProofSection() {
     ]
   )
   const [selectedReview, setSelectedReview] = useState(0)
+
+  useEffect(() => {
+    const gate = reviewsGateRef.current
+
+    if (!gate || typeof IntersectionObserver === "undefined") {
+      setReviewsReady(true)
+      return
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+
+        setReviewsReady(true)
+        observer.disconnect()
+      },
+      { rootMargin: "900px 0px" }
+    )
+
+    observer.observe(gate)
+    return () => observer.disconnect()
+  }, [])
 
   const updateSelectedReview = useCallback(() => {
     if (!emblaApi) return
@@ -414,49 +474,55 @@ export function TrustProofSection() {
           </p>
         </div>
 
-        <div
-          className="-mx-5 -my-8 mt-2 overflow-hidden bg-transparent px-5 py-8 shadow-none ring-0 sm:-mx-6 sm:px-6"
-          ref={emblaRef}
-        >
-          <div className="-mr-4 flex touch-pan-y sm:-mr-5">
-            {customerReviews.map((review) => (
+        <div ref={reviewsGateRef} className="mt-2 min-h-[31rem] sm:min-h-[29rem]">
+          {reviewsReady && (
+            <>
               <div
-                key={`${review.name}-${review.business}`}
-                className="min-w-0 shrink-0 grow-0 basis-full pr-4 sm:basis-1/2 sm:pr-5 lg:basis-1/3"
+                className="-mx-5 -my-8 overflow-hidden bg-transparent px-5 py-8 shadow-none ring-0 sm:-mx-6 sm:px-6"
+                ref={emblaRef}
               >
-                <ReviewCard review={review} />
+                <div className="-mr-4 flex touch-pan-y sm:-mr-5">
+                  {customerReviews.map((review) => (
+                    <div
+                      key={`${review.name}-${review.business}`}
+                      className="min-w-0 shrink-0 grow-0 basis-full pr-4 sm:basis-1/2 sm:pr-5 lg:basis-1/3"
+                    >
+                      <ReviewCard review={review} />
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
 
-        <div
-          className="mt-3 flex items-center justify-center gap-2"
-          role="group"
-          aria-label="التنقل بين مراجعات العملاء"
-        >
-          {customerReviews.map((review, index) => {
-            const isSelected = index === selectedReview
-
-            return (
-              <button
-                key={`${review.name}-indicator`}
-                type="button"
-                onClick={() => emblaApi?.scrollTo(index)}
-                className="group grid h-7 w-7 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark"
-                aria-label={`عرض مراجعة ${review.name}`}
-                aria-current={isSelected ? "true" : undefined}
+              <div
+                className="mt-3 flex items-center justify-center gap-2"
+                role="group"
+                aria-label="التنقل بين مراجعات العملاء"
               >
-                <span
-                  className={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${isSelected
-                    ? "bg-primary-dark"
-                    : "bg-primary-dark/20 group-hover:bg-primary-dark/50"
-                    }`}
-                  aria-hidden="true"
-                />
-              </button>
-            )
-          })}
+                {customerReviews.map((review, index) => {
+                  const isSelected = index === selectedReview
+
+                  return (
+                    <button
+                      key={`${review.name}-indicator`}
+                      type="button"
+                      onClick={() => emblaApi?.scrollTo(index)}
+                      className="group grid h-7 w-7 place-items-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-dark"
+                      aria-label={`عرض مراجعة ${review.name}`}
+                      aria-current={isSelected ? "true" : undefined}
+                    >
+                      <span
+                        className={`h-2.5 w-2.5 rounded-full transition-colors duration-300 ${isSelected
+                          ? "bg-primary-dark"
+                          : "bg-primary-dark/20 group-hover:bg-primary-dark/50"
+                          }`}
+                        aria-hidden="true"
+                      />
+                    </button>
+                  )
+                })}
+              </div>
+            </>
+          )}
         </div>
 
         <div id="pricing" className="mx-auto mt-24 max-w-3xl scroll-mt-20 text-center sm:scroll-mt-24">

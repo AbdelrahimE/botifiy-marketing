@@ -257,10 +257,6 @@ export function HeroSection() {
   }
 
   const showConversationStep = (stepIndex: number) => conversationStep >= stepIndex
-  const conversationStepClass = (stepIndex: number) =>
-    showConversationStep(stepIndex)
-      ? "hero-chat-enter opacity-100 visible"
-      : "opacity-0 invisible pointer-events-none"
 
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-[#F0FFF4] via-white to-[#F8FFF9]">
@@ -378,48 +374,63 @@ export function HeroSection() {
                     className="hero-chat-content-swap relative z-10 space-y-1.5"
                     aria-live="polite"
                   >
-                    <div className={conversationStepClass(0)}>
-                      <ChatBubble message={activeIndustry.messages[0]} />
-                    </div>
+                    {showConversationStep(0) && (
+                      <div className="hero-chat-enter">
+                        <ChatBubble message={activeIndustry.messages[0]} />
+                      </div>
+                    )}
 
                     <div className="relative">
                       {conversationStep === 1 && <TypingIndicator />}
-                      <div className={conversationStepClass(2)}>
-                        <ChatBubble message={activeIndustry.messages[1]} />
-                      </div>
+                      {showConversationStep(2) && (
+                        <div className="hero-chat-enter">
+                          <ChatBubble message={activeIndustry.messages[1]} />
+                        </div>
+                      )}
                     </div>
 
-                    <div className={conversationStepClass(3)}>
-                      <div className="flex justify-end">
-                        <StatusPill icon="bot" text={activeIndustry.statusBadges.ai} />
+                    {showConversationStep(3) && (
+                      <div className="hero-chat-enter">
+                        <div className="flex justify-end">
+                          <StatusPill icon="bot" text={activeIndustry.statusBadges.ai} />
+                        </div>
                       </div>
-                    </div>
+                    )}
 
-                    <div className={conversationStepClass(4)}>
-                      <ChatBubble message={activeIndustry.messages[2]} />
-                    </div>
+                    {showConversationStep(4) && (
+                      <div className="hero-chat-enter">
+                        <ChatBubble message={activeIndustry.messages[2]} />
+                      </div>
+                    )}
 
                     <div className="relative">
                       {conversationStep === 5 && <TypingIndicator />}
-                      <div className={conversationStepClass(6)}>
-                        <ChatBubble message={activeIndustry.messages[3]} />
-                      </div>
+                      {showConversationStep(6) && (
+                        <div className="hero-chat-enter">
+                          <ChatBubble message={activeIndustry.messages[3]} />
+                        </div>
+                      )}
                     </div>
 
-                    <div className={conversationStepClass(7)}>
+                    {conversationStep === 7 && (
                       <div className="relative">
-                        {conversationStep === 7 && <TypingIndicator />}
-                        <div className={conversationStepClass(8)}>
-                          <ChatBubble message={activeIndustry.followUps[0]} />
+                        <TypingIndicator />
+                      </div>
+                    )}
+
+                    {showConversationStep(8) && (
+                      <div className="hero-chat-enter">
+                        <ChatBubble message={activeIndustry.followUps[0]} />
+                      </div>
+                    )}
+
+                    {showConversationStep(9) && (
+                      <div className="hero-chat-enter">
+                        <div className="flex justify-end">
+                          <StatusPill icon="clock" text={activeIndustry.statusBadges.followUp} />
                         </div>
                       </div>
-                    </div>
-
-                    <div className={conversationStepClass(9)}>
-                      <div className="flex justify-end">
-                        <StatusPill icon="clock" text={activeIndustry.statusBadges.followUp} />
-                      </div>
-                    </div>
+                    )}
                   </div>
                 </div>
 

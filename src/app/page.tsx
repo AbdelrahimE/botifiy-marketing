@@ -1,9 +1,6 @@
-'use client';
-
-import { useEffect } from "react";
-import Script from "next/script";
-import { trackViewHome } from "@/lib/gtm";
 import { Header } from "@/components/header"
+import { HomeViewTracker } from "@/components/home-view-tracker"
+import { RevealObserver } from "@/components/reveal-observer"
 import { HeroSection } from "@/components/hero-section"
 import { DemoVideoSection } from "@/components/demo-video-section"
 import { ProblemSection } from "@/components/problem-section"
@@ -15,15 +12,10 @@ import { FaqSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
 
 export default function HomePage() {
-  useEffect(() => {
-    trackViewHome();
-  }, []);
-
   return (
     <>
       {/* SoftwareApplication Schema - Structured Data */}
-      <Script
-        id="software-application-schema"
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
@@ -66,6 +58,9 @@ export default function HomePage() {
           })
         }}
       />
+
+      <HomeViewTracker />
+      <RevealObserver />
 
       <Header />
       <main className="min-h-screen">

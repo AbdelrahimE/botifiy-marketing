@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useRef } from "react"
 import {
   ArrowLeft,
   Bot,
@@ -75,32 +72,8 @@ const businessBenefits: BusinessBenefit[] = [
 ]
 
 export function BusinessBenefitsSection() {
-  const sectionRef = useRef<HTMLElement | null>(null)
-
-  useEffect(() => {
-    const section = sectionRef.current
-    if (!section) return
-
-    const items = section.querySelectorAll<HTMLElement>("[data-benefit-reveal]")
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("benefit-reveal-visible")
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -8% 0px" }
-    )
-
-    items.forEach((item) => observer.observe(item))
-    return () => observer.disconnect()
-  }, [])
-
   return (
     <section
-      ref={sectionRef}
       id="business-benefits"
       dir="rtl"
       className="relative overflow-hidden bg-[#041108] py-20 text-white sm:py-24 lg:py-28"

@@ -60,6 +60,7 @@ export function Header() {
                 alt="شعار بوتيفاي"
                 width={150}
                 height={50}
+                sizes="(max-width: 767px) 108px, 144px"
                 className="h-9 w-auto md:h-12 md:w-auto object-contain"
                 priority
               />

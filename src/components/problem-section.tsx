@@ -1,6 +1,3 @@
-"use client"
-
-import { useEffect, useRef, useState } from "react"
 import { ArrowLeft, CalendarClock, CheckCircle2, Clock3, MessageCircle, MousePointerClick, Reply, Lightbulb } from "lucide-react"
 
 const journeySteps = [
@@ -48,33 +45,8 @@ const journeySteps = [
 ]
 
 export function ProblemSection() {
-  const sectionRef = useRef<HTMLElement | null>(null)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    const section = sectionRef.current
-
-    if (!section) {
-      return
-    }
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true)
-          observer.disconnect()
-        }
-      },
-      { threshold: 0.25 }
-    )
-
-    observer.observe(section)
-
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section ref={sectionRef} id="problem" className="relative overflow-hidden bg-white py-10 sm:py-12">
+    <section id="problem" className="relative overflow-hidden bg-white py-10 sm:py-12">
       <div className="max-w-container mx-auto px-6">
         <div className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-text-primary leading-tight mb-4">
@@ -83,7 +55,7 @@ export function ProblemSection() {
           </h2>
         </div>
 
-        <div className={`problem-reveal mx-auto mb-6 max-w-3xl ${isVisible ? "problem-reveal-in" : "problem-reveal-wait"}`}>
+        <div className="problem-reveal problem-reveal-wait mx-auto mb-6 max-w-3xl">
           <div className="rounded-2xl border border-primary/25 bg-primary-light/60 p-4 text-right shadow-sm">
             <div className="mb-3 flex items-center justify-between gap-3 border-b border-primary/15 pb-2.5">
               <div className="flex items-center gap-2 text-sm font-bold text-text-primary">
@@ -189,7 +161,7 @@ export function ProblemSection() {
               return (
                 <div
                   key={step.step}
-                  className={`problem-reveal relative ${step.featured ? "col-span-2 lg:col-span-1" : ""} ${isVisible ? "problem-reveal-in" : "problem-reveal-wait"}`}
+                  className={`problem-reveal problem-reveal-wait relative ${step.featured ? "col-span-2 lg:col-span-1" : ""}`}
                   style={{ transitionDelay: `${140 + index * 110}ms`, zIndex: 10 - index }}
                 >
                   {index < journeySteps.length - 1 && (
@@ -234,7 +206,7 @@ export function ProblemSection() {
         </div>
 
         <div
-          className={`problem-reveal relative mx-auto mt-12 max-w-2xl rounded-2xl border border-gray-200 bg-gray-50/80 px-6 py-5 text-center shadow-sm ${isVisible ? "problem-reveal-in" : "problem-reveal-wait"}`}
+          className="problem-reveal problem-reveal-wait relative mx-auto mt-12 max-w-2xl rounded-2xl border border-gray-200 bg-gray-50/80 px-6 py-5 text-center shadow-sm"
           style={{ transitionDelay: "760ms" }}
         >
           <div className="absolute -top-6 left-0 right-0 mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-amber-500 shadow-sm">

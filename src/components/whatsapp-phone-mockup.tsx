@@ -184,7 +184,6 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
           src="/images/whatsapp-mockup/iphone-xs-max-space-grey.webp"
           alt=""
           fill
-          priority
           sizes="(max-width: 640px) 88vw, 410px"
           className="wa-phone-frame"
           aria-hidden="true"
