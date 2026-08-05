@@ -20,6 +20,8 @@ import {
   type LeadNeed,
   type SelectedPlan,
 } from "@/lib/lead-schema"
+import { allowsAnalyticsMeasurement, readBrowserConsent } from "@/lib/consent"
+import { trackMetaLead } from "@/lib/meta-pixel"
 
 type ActivationFormProps = {
   initialCountry: Country
@@ -118,17 +120,44 @@ export function ActivationForm({ initialCountry, selectedPlan, source }: Activat
         body: JSON.stringify(validation.data),
       })
       const result = (await response.json().catch(() => null)) as
-        | { ok?: boolean; message?: string }
+        | {
+            ok?: boolean
+            accepted?: boolean
+            leadId?: string
+            source?: string
+            message?: string
+          }
         | null
 
-      if (!response.ok || !result?.ok) {
+      if (!response.ok || !result?.ok || !result.accepted || !result.leadId) {
+        if (response.ok && result?.ok && result?.accepted === false) {
+          setIsSuccess(true)
+          window.scrollTo({ top: 0, behavior: "smooth" })
+          return
+        }
         throw new Error(result?.message ?? "حصلت مشكلة مؤقتة. حاول مرة تانية.")
       }
 
       setIsSuccess(true)
       window.scrollTo({ top: 0, behavior: "smooth" })
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({ event: "generate_lead", selected_plan: selectedPlan, source })
+      const trackedSource = result.source ?? source
+      const consent = readBrowserConsent()
+
+      if (allowsAnalyticsMeasurement(consent)) {
+        window.dataLayer = window.dataLayer || []
+        window.dataLayer.push({
+          event: "generate_lead",
+          event_id: result.leadId,
+          selected_plan: selectedPlan,
+          source: trackedSource,
+        })
+      }
+
+      trackMetaLead({
+        eventId: result.leadId,
+        selectedPlan,
+        source: trackedSource,
+      })
     } catch (error) {
       setServerError(
         error instanceof Error
@@ -249,7 +278,7 @@ export function ActivationForm({ initialCountry, selectedPlan, source }: Activat
             }}
           />
           <p className="mt-1.5 text-xs leading-5 text-text-secondary/75">
-            كود الدولة بيتضاف تلقائيًا، وهنستخدم الرقم للتواصل معاك على واتساب فقط.
+            كود الدولة بيتضاف تلقائيًا، وهنستخدم الرقم للتواصل معاك على واتساب وقياس أداء طلبات التفعيل.
           </p>
           {errors.whatsapp && <p id="whatsapp-error" className="activation-error">{errors.whatsapp}</p>}
         </div>

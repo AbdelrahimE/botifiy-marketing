@@ -1,7 +1,18 @@
 import { NextRequest, NextResponse } from "next/server"
 import { ZodError } from "zod"
+import {
+  attributionSource,
+  parseAttributionCookie,
+  ATTRIBUTION_COOKIE_NAME,
+} from "@/lib/attribution"
+import {
+  allowsMarketingMeasurement,
+  CONSENT_COOKIE_NAME,
+  parseConsentCookie,
+} from "@/lib/consent"
 import { sendLeadToGoogleSheets } from "@/lib/google-sheets"
 import { leadFormSchema } from "@/lib/lead-schema"
+import { sendMetaLead } from "@/lib/meta-capi"
 import { saveLead } from "@/lib/supabase-leads"
 
 export const runtime = "nodejs"
@@ -30,6 +41,21 @@ function getClientIp(request: NextRequest) {
     request.headers.get("x-real-ip") ??
     "0.0.0.0"
   ).slice(0, 64)
+}
+
+function getEventSourceUrl(request: NextRequest) {
+  const fallback = `${request.nextUrl.origin}/activate`
+  const referer = request.headers.get("referer")
+  if (!referer) return fallback
+
+  try {
+    const url = new URL(referer)
+    if (!["http:", "https:"].includes(url.protocol)) return fallback
+    if (url.origin !== request.nextUrl.origin && !PRODUCTION_ORIGINS.has(url.origin)) return fallback
+    return `${url.origin}${url.pathname}`.slice(0, 2_000)
+  } catch {
+    return fallback
+  }
 }
 
 function logLeadEvent(
@@ -61,23 +87,74 @@ export async function POST(request: NextRequest) {
     // Honeypot: return a neutral response without writing bot traffic to either system.
     if (parsed.companyWebsite) {
       logLeadEvent("warn", "honeypot_triggered", { requestId })
-      return NextResponse.json({ ok: true }, { status: 202 })
+      return NextResponse.json({ ok: true, accepted: false }, { status: 202 })
     }
 
     const ip = getClientIp(request)
     const userAgent = (request.headers.get("user-agent") ?? "unknown").slice(0, 500)
-    const savedLead = await saveLead({ ...parsed, ip, userAgent })
+    const consent = parseConsentCookie(request.cookies.get(CONSENT_COOKIE_NAME)?.value)
+    const marketingAllowed = allowsMarketingMeasurement(consent)
+    const attribution = parseAttributionCookie(
+      request.cookies.get(ATTRIBUTION_COOKIE_NAME)?.value,
+    )
+    const normalizedLead = {
+      ...parsed,
+      source: attributionSource(attribution, parsed.source),
+    }
+    const savedLead = await saveLead({
+      ...normalizedLead,
+      ip,
+      userAgent,
+      attribution,
+      marketingConsent: marketingAllowed,
+      consentUpdatedAt: consent?.updatedAt ?? null,
+    })
 
     logLeadEvent("info", "supabase_saved", {
       requestId,
       leadId: savedLead.id,
       duplicate: savedLead.duplicate,
-      selectedPlan: parsed.selectedPlan,
+      selectedPlan: normalizedLead.selectedPlan,
     })
+
+    if (marketingAllowed) {
+      try {
+        const metaResult = await sendMetaLead({
+          eventId: savedLead.id,
+          createdAt: savedLead.created_at,
+          eventSourceUrl: getEventSourceUrl(request),
+          name: normalizedLead.name,
+          whatsapp: normalizedLead.whatsapp,
+          selectedPlan: normalizedLead.selectedPlan,
+          source: normalizedLead.source,
+          ip,
+          userAgent,
+          fbc: request.cookies.get("_fbc")?.value,
+          fbp: request.cookies.get("_fbp")?.value,
+          attribution,
+        })
+
+        logLeadEvent(metaResult.status === "sent" ? "info" : "warn", `meta_${metaResult.status}`, {
+          requestId,
+          leadId: savedLead.id,
+          ...(metaResult.status === "sent"
+            ? { traceId: metaResult.traceId }
+            : { reason: metaResult.reason }),
+        })
+      } catch (error) {
+        logLeadEvent("error", "meta_failed", {
+          requestId,
+          leadId: savedLead.id,
+          error: error instanceof Error ? error.message : "UNKNOWN_ERROR",
+        })
+      }
+    } else {
+      logLeadEvent("info", "meta_skipped_no_consent", { requestId, leadId: savedLead.id })
+    }
 
     if (!savedLead.duplicate) {
       try {
-        await sendLeadToGoogleSheets({ ...parsed, ip, userAgent, savedLead })
+        await sendLeadToGoogleSheets({ ...normalizedLead, ip, userAgent, savedLead })
         logLeadEvent("info", "google_sheets_synced", { requestId, leadId: savedLead.id })
       } catch (error) {
         logLeadEvent("error", "google_sheets_failed", {
@@ -88,7 +165,12 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    return NextResponse.json({ ok: true, leadId: savedLead.id })
+    return NextResponse.json({
+      ok: true,
+      accepted: true,
+      leadId: savedLead.id,
+      source: normalizedLead.source,
+    })
   } catch (error) {
     if (error instanceof ZodError) {
       logLeadEvent("warn", "validation_failed", {

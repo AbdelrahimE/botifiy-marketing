@@ -22,7 +22,7 @@ const journeySteps = [
     step: "03",
     title: "راح لمنافس تاني",
     scene: ["قفل المحادثة معاك.", "وراسل غيرك."],
-    note: "لأن الأسرع يقود.",
+    note: "لأن الأسرع يكسب.",
     className: "lg:mt-2",
   },
   {
@@ -60,7 +60,7 @@ export function ProblemSection() {
             <div className="mb-3 flex items-center justify-between gap-3 border-b border-primary/15 pb-2.5">
               <div className="flex items-center gap-2 text-sm font-bold text-text-primary">
                 <span className="h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_0_5px_rgba(99,221,50,0.14)]" aria-hidden="true" />
-                مشهد يتكرر كل يوم
+                موقف يتكرر كل يوم
               </div>
               <div className="flex items-center gap-1.5 rounded-full border border-primary/25 bg-white px-3 py-1 text-xs font-bold text-text-secondary">
                 <CalendarClock className="h-3.5 w-3.5 text-primary-dark" aria-hidden="true" />
@@ -70,7 +70,7 @@ export function ProblemSection() {
 
             <div className="grid gap-3 md:grid-cols-[1fr_auto_1fr] md:items-center">
               <div className="rounded-2xl rounded-tl-md border border-primary/25 bg-white px-4 py-2.5 text-base font-medium leading-relaxed text-primary-dark shadow-elevation1">
-                عميل بيسألك عن السعر… وهو بالفعل ناوي يشتري.
+                عميل يسأل عن السعر وهو ناوي يشتري.
               </div>
               <div className="hidden h-px w-10 bg-primary/30 md:block" aria-hidden="true" />
               <div className="rounded-2xl rounded-tr-md border border-border-custom bg-white/70 px-4 py-2.5 text-base font-medium leading-relaxed text-text-secondary">

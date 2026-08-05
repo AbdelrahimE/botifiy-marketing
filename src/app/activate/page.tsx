@@ -70,7 +70,7 @@ export default async function ActivationPage({ searchParams }: ActivationPagePro
       />
 
       <p className="mx-auto mt-5 max-w-[760px] text-center text-xs leading-5 text-text-secondary/70">
-        بإرسال الطلب أنت توافق على <Link href="/privacy-policy" className="font-bold underline decoration-primary underline-offset-2">سياسة الخصوصية</Link>، ولن نستخدم بياناتك إلا للتواصل بخصوص تفعيل بوتيفاي.
+        بإرسال الطلب أنت توافق على استخدام بياناتك للتواصل بخصوص تفعيل بوتيفاي وقياس أداء طلبات التفعيل وفق <Link href="/privacy-policy" className="font-bold underline decoration-primary underline-offset-2">سياسة الخصوصية</Link>.
       </p>
     </main>
   )

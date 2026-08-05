@@ -1,6 +1,7 @@
 import "server-only"
 
 import { createClient } from "@supabase/supabase-js"
+import type { AttributionData } from "@/lib/attribution"
 import type { LeadFormPayload } from "@/lib/lead-schema"
 
 export type SavedLead = {
@@ -13,6 +14,9 @@ export type SavedLead = {
 type ServerLeadData = LeadFormPayload & {
   ip: string
   userAgent: string
+  attribution: AttributionData | null
+  marketingConsent: boolean
+  consentUpdatedAt: string | null
 }
 
 function getSupabaseClient() {
@@ -36,7 +40,10 @@ export async function saveLead(data: ServerLeadData): Promise<SavedLead> {
   const supabase = getSupabaseClient()
   const { data: savedLead, error } = await supabase.rpc("submit_lead", {
     p_business_type: data.businessType,
+    p_attribution: data.attribution ?? {},
+    p_consent_updated_at: data.consentUpdatedAt,
     p_ip: data.ip,
+    p_marketing_consent: data.marketingConsent,
     p_name: data.name,
     p_needs: data.needs,
     p_selected_plan: data.selectedPlan,
@@ -58,4 +65,3 @@ export async function saveLead(data: ServerLeadData): Promise<SavedLead> {
 
   return savedLead as SavedLead
 }
-

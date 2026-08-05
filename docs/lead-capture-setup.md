@@ -3,6 +3,8 @@
 ## 1. Supabase
 
 نفّذ ملف `supabase/migrations/202607130001_create_leads.sql` مرة واحدة من Supabase SQL Editor.
+ثم نفّذ `supabase/migrations/202608050001_add_lead_attribution_and_consent.sql` قبل نشر
+نسخة الموقع التي تحتوي Meta Pixel وConversions API.
 المشروع يستخدم `SUPABASE_URL` و`SUPABASE_ANON_KEY` الموجودين بالفعل في `.env`، ولا يحتاج إلى Service Role Key.
 
 التصميم الأمني يعتمد على:
@@ -46,6 +48,34 @@ GOOGLE_SHEETS_WEBHOOK_SECRET=نفس_القيمة_العشوائية
 - `validation_failed`
 - `rate_limited`
 - `honeypot_triggered`
+- `meta_sent`
+- `meta_skipped`
+- `meta_skipped_no_consent`
+- `meta_failed`
 
 لا تُكتب أسماء العملاء أو أرقامهم في logs.
 
+## 5. Meta Pixel وConversions API
+
+> **ملاحظة للمطورين — قرار المنتج بتاريخ 5 أغسطس 2026:** واجهة الموافقة محفوظة
+> بالكامل لكنها معطلة حاليًا عبر `CONSENT_UI_ENABLED = false` لأن الحملات في هذه
+> المرحلة تستهدف الدول العربية فقط، ولتجنب إضافة خطوة تعطل رحلة الـLead. في هذا
+> الوضع تعمل التحليلات وMeta افتراضيًا. لا تحذف كود الموافقة؛ غيّر المفتاح إلى
+> `true` إذا تغير نطاق الاستهداف أو المتطلبات القانونية أو سياسة المنتج.
+
+أضف متغيرات البيئة التالية في بيئة النشر. لا تضع Access Token داخل متغير يبدأ
+بـ`NEXT_PUBLIC_` ولا داخل GTM:
+
+```env
+NEXT_PUBLIC_META_PIXEL_ID=1387649563296613
+META_PIXEL_ID=1387649563296613
+META_CAPI_ACCESS_TOKEN=ضع_التوكن_الصادر_من_Events_Manager
+META_GRAPH_API_VERSION=v25.0
+```
+
+أثناء الاختبار فقط، أضف `META_TEST_EVENT_CODE` من شاشة Test Events. احذفه قبل
+تشغيل الحملات الفعلية حتى لا تظل أحداث الإنتاج موسومة كأحداث اختبار.
+
+يتم إرسال حدث `Lead` من الخادم بعد نجاح Supabase. وإذا أُعيد تفعيل بوابة الموافقة
+لاحقًا، فلن يُرسل الحدث إلا عند السماح بقياس الإعلانات.
+يستخدم الخادم والمتصفح نفس `leadId` كـ`event_id` لمنع ازدواج الحدث.

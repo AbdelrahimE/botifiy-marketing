@@ -30,14 +30,22 @@ export type WhatsAppConversationEvent =
     time: string
     read?: boolean
     options?: string[]
+    image?: {
+      src: string
+      alt: string
+    }
+    delayMs?: number
   }
   | {
     type: "typing"
+    actor?: "customer" | "business"
+    delayMs?: number
   }
   | {
     type: "label"
     text: string
     tone?: "intent" | "danger" | "success"
+    delayMs?: number
   }
 
 export type WhatsAppConversationScenario = {
@@ -45,6 +53,7 @@ export type WhatsAppConversationScenario = {
   contactName: string
   avatar: IconName
   events: WhatsAppConversationEvent[]
+  eventIntervalMs?: number
 }
 
 const defaultScenario: WhatsAppConversationScenario = {
@@ -52,12 +61,18 @@ const defaultScenario: WhatsAppConversationScenario = {
   contactName: "متجر الأقصي",
   avatar: "shopping",
   events: [
-    { type: "customer", text: "السلام عليكم.. المكنسة دي متوفرة؟", time: "9:41" },
+    { type: "customer", text: "السلام عليكم", time: "9:41" },
+    { type: "typing", actor: "customer", delayMs: 0 },
+    { type: "customer", text: "المنتج متوفر ؟ والتوصيل بكام ؟", time: "9:41", delayMs: 1000 },
     { type: "label", tone: "intent", text: "بوتيفاي فهم نية العميل وبعتله الرد الجاهز" },
     { type: "typing" },
     {
       type: "business",
       text: ["أهلاً بك 👋", "اختر ما يناسبك :"],
+      image: {
+        src: "/images/whatsapp-mockup/mknsa.png",
+        alt: "مكنسة كهربائية Smile Tech بقوة 2000 وات",
+      },
       options: ["معرفة سعر المكنسة", "الشحن والتوصيل", "اطلب الآن"],
       time: "9:41",
       read: true,
@@ -66,7 +81,7 @@ const defaultScenario: WhatsAppConversationScenario = {
     { type: "typing" },
     {
       type: "business",
-      text: "السعر 15 دولارًا + توصيل مجاني 🎉\nاكتب الاسم والعنوان عشان أجهز لك الطلب.",
+      text: "السعر 8499 جنيه + توصيل مجاني 🎉\nاكتب الاسم والعنوان عشان أجهز لك الطلب.",
       time: "9:42",
       read: true,
     },
@@ -79,7 +94,7 @@ const defaultScenario: WhatsAppConversationScenario = {
       time: "1:42",
       read: true,
     },
-    { type: "customer", text: "أحمد محمد، 12 شارع النصر، مدينة نصر", time: "1:43" },
+    { type: "customer", text: "تمام .. اسمي أحمد محمد والعنوان 12 شارع النصر مدينة نصر", time: "1:43" },
     { type: "typing" },
     { type: "business", text: ["ممتاز 🎉", "تم استلام طلبك."], time: "1:43", read: true },
   ],
@@ -112,10 +127,18 @@ function MessageTime({ time, read = false }: { time: string; read?: boolean }) {
   )
 }
 
-function TypingBubble() {
+function TypingBubble({ actor = "business" }: { actor?: "customer" | "business" }) {
+  const isCustomer = actor === "customer"
+
   return (
-    <div className="wa-message-row wa-message-row-business wa-message-enter" aria-label="بوتيفاي يكتب الآن">
-      <div className="wa-bubble wa-bubble-business wa-typing-bubble" aria-hidden="true">
+    <div
+      className={`wa-message-row wa-message-enter ${isCustomer ? "wa-message-row-customer" : "wa-message-row-business"}`}
+      aria-label={isCustomer ? "العميل يكتب الآن" : "بوتيفاي يكتب الآن"}
+    >
+      <div
+        className={`wa-bubble wa-typing-bubble ${isCustomer ? "wa-bubble-customer" : "wa-bubble-business"}`}
+        aria-hidden="true"
+      >
         <span />
         <span />
         <span />
@@ -144,9 +167,10 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
 
   useEffect(() => {
     const isComplete = conversationStep >= scenario.events.length - 1
+    const nextEvent = scenario.events[conversationStep + 1]
     const nextDelay = isComplete
       ? conversationPauseBeforeRestart
-      : eventDelay(scenario.events[conversationStep + 1])
+      : nextEvent?.delayMs ?? scenario.eventIntervalMs ?? eventDelay(nextEvent)
 
     const timeoutId = window.setTimeout(() => {
       setConversation({
@@ -173,7 +197,8 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
     return () => window.cancelAnimationFrame(animationFrameId)
   }, [conversationStep])
 
-  const botIsTyping = scenario.events[conversationStep]?.type === "typing"
+  const activeEvent = scenario.events[conversationStep]
+  const botIsTyping = activeEvent?.type === "typing" && activeEvent.actor !== "customer"
 
   return (
     <div className="wa-phone-stage">
@@ -181,7 +206,7 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
 
       <div className="wa-phone" aria-label="محادثة واتساب تجريبية داخل هاتف آيفون">
         <Image
-          src="/images/whatsapp-mockup/iphone-xs-max-space-grey.webp"
+          src="/images/whatsapp-mockup/iphone-xs-max-space-grey.png"
           alt=""
           fill
           sizes="(max-width: 640px) 88vw, 410px"
@@ -192,10 +217,6 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
         <div className="wa-screen">
           <div className="wa-status-bar" dir="ltr">
             <span className="wa-status-time">9:41</span>
-            <div className="wa-notch" aria-hidden="true">
-              <span className="wa-speaker" />
-              <span className="wa-camera" />
-            </div>
             <div className="wa-status-icons" aria-hidden="true">
               <span className="wa-signal"><i /><i /><i /><i /></span>
               <span className="wa-wifi">⌁</span>
@@ -245,7 +266,9 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
                 const isVisible = conversationStep >= index
 
                 if (event.type === "typing") {
-                  return conversationStep === index ? <TypingBubble key={`${scenario.id}-${index}`} /> : null
+                  return conversationStep === index
+                    ? <TypingBubble key={`${scenario.id}-${index}`} actor={event.actor} />
+                    : null
                 }
 
                 if (!isVisible) return null
@@ -272,6 +295,16 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
                     <div
                       className={`wa-bubble ${event.type === "customer" ? "wa-bubble-customer" : "wa-bubble-business"} ${event.options ? "wa-options-bubble" : ""}`}
                     >
+                      {event.image && (
+                        <Image
+                          src={event.image.src}
+                          alt={event.image.alt}
+                          width={1254}
+                          height={1254}
+                          sizes="(max-width: 640px) 68vw, 285px"
+                          className="wa-message-image"
+                        />
+                      )}
                       <MessageText text={event.text} />
                       {event.options && (
                         <div className="wa-quick-replies">
@@ -298,8 +331,6 @@ export function WhatsAppPhoneMockup({ scenario = defaultScenario }: { scenario?:
               <button type="button" className="wa-plus-button" aria-label="إرفاق"><Plus /></button>
             </div>
           </div>
-
-          <div className="wa-home-area" aria-hidden="true"><span /></div>
         </div>
       </div>
     </div>

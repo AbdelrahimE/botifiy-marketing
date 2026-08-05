@@ -569,11 +569,12 @@ html {
   place-items: center;
   overflow: hidden;
   padding: clamp(14px, 2.5vh, 28px);
-  background-color: #237114;
-  background-image: url("/images/whatsapp-mockup/botifiy-mesh-gradient.webp");
-  background-position: center;
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+  background: #fff;
+}
+
+.whatsapp-mockup-page-transparent {
+  background-color: transparent;
+  background-image: none;
 }
 
 .wa-phone-stage {
@@ -589,11 +590,18 @@ html {
 .wa-phone-shadow {
   position: absolute;
   z-index: -1;
-  inset: 5% -12% 2%;
+  inset: 7% -5% 4%;
   border-radius: 22%;
-  background: rgba(2, 22, 0, 0.48);
-  filter: blur(34px);
-  transform: translateY(18px);
+  background: rgba(2, 22, 0, .22);
+  filter: blur(24px);
+  transform: translateY(10px);
+}
+
+.whatsapp-mockup-page-transparent .wa-phone-shadow {
+  inset: 7% -5% 4%;
+  background: rgba(2, 22, 0, .22);
+  filter: blur(24px);
+  transform: translateY(10px);
 }
 
 .wa-phone {
@@ -602,7 +610,7 @@ html {
 }
 
 .wa-phone-frame {
-  z-index: 1;
+  z-index: 3;
   object-fit: contain;
   pointer-events: none;
   user-select: none;
@@ -611,10 +619,10 @@ html {
 .wa-screen {
   position: absolute;
   z-index: 2;
-  top: 3.55%;
-  right: 7.25%;
-  bottom: 3.4%;
-  left: 7.25%;
+  top: 2%;
+  right: 6.5%;
+  bottom: .9%;
+  left: 6.5%;
   box-sizing: border-box;
   display: flex;
   min-height: 0;
@@ -645,39 +653,6 @@ html {
 .wa-status-time {
   min-width: 38px;
   text-align: center;
-}
-
-.wa-notch {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 47%;
-  height: 24px;
-  transform: translateX(-50%);
-  border-radius: 0 0 15px 15px;
-  background: #050505;
-}
-
-.wa-speaker {
-  position: absolute;
-  top: 8px;
-  left: 50%;
-  width: 34%;
-  height: 4px;
-  transform: translateX(-50%);
-  border-radius: 999px;
-  background: #1b1b1d;
-}
-
-.wa-camera {
-  position: absolute;
-  top: 7px;
-  right: 18%;
-  width: 6px;
-  height: 6px;
-  border: 1px solid #123457;
-  border-radius: 50%;
-  background: #071322;
 }
 
 .wa-status-icons {
@@ -853,6 +828,7 @@ html {
 .wa-wallpaper-image {
   z-index: 0;
   object-fit: cover;
+  transform: scaleY(1.04);
   opacity: .78;
 }
 
@@ -930,12 +906,24 @@ html {
   padding: 6px 8px 5px;
   border-radius: 7px;
   box-shadow: 0 1px 1px rgba(11, 20, 26, .16);
-  font-size: clamp(9px, 2.65vw, 12px);
+  font-size: clamp(11.25px, 3.3125vw, 15px);
   line-height: 1.45;
+}
+
+.whatsapp-mockup-page-transparent .wa-bubble {
+  font-size: clamp(15px, 3.125vw, 17.5px);
 }
 
 .wa-bubble p {
   margin: 0;
+}
+
+.wa-message-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 8px;
+  border-radius: 5px;
 }
 
 .wa-bubble-customer {
@@ -976,14 +964,14 @@ html {
   gap: 2px;
   color: #667781;
   font-family: Arial, sans-serif;
-  font-size: clamp(6px, 1.75vw, 8px);
+  font-size: clamp(7.5px, 2.1875vw, 10px);
   line-height: 1;
   white-space: nowrap;
 }
 
 .wa-message-time svg {
-  width: 12px;
-  height: 12px;
+  width: 15px;
+  height: 15px;
   color: #53bdeb;
   stroke-width: 2;
 }
@@ -1019,15 +1007,15 @@ html {
   display: inline-flex;
   align-self: center;
   align-items: center;
-  gap: 7px;
+  gap: 8px;
   max-width: 92%;
-  padding: 6px 12px;
+  padding: 7px 14px;
   border: 1px solid rgba(0, 128, 105, .16);
   border-radius: 999px;
   color: #2f5846;
   background: rgba(255, 255, 255, .94);
   box-shadow: 0 2px 4px rgba(11, 20, 26, .14);
-  font-size: clamp(8px, 2.35vw, 10.5px);
+  font-size: clamp(10px, 2.9375vw, 13.125px);
   font-weight: 600;
   line-height: 1.35;
   text-align: center;
@@ -1090,7 +1078,7 @@ html {
   min-height: 48px;
   align-items: center;
   gap: 5px;
-  padding: 5px 6px 6px;
+  padding: 10px 10px 30px;
 }
 
 .wa-input-shell {
@@ -1143,21 +1131,6 @@ html {
   display: none;
 }
 
-.wa-home-area {
-  display: grid;
-  height: 18px;
-  flex: none;
-  place-items: center;
-  background: #080808;
-}
-
-.wa-home-area span {
-  width: 36%;
-  height: 4px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, .9);
-}
-
 .wa-message-enter {
   animation: wa-message-in 420ms cubic-bezier(.2, .8, .2, 1) both;
 }
@@ -1207,18 +1180,6 @@ html {
     padding-top: 6px;
   }
 
-  .wa-notch {
-    height: 20px;
-  }
-
-  .wa-speaker {
-    top: 6px;
-  }
-
-  .wa-camera {
-    top: 5px;
-  }
-
   .wa-chat-header {
     min-height: 46px;
   }
@@ -1250,9 +1211,9 @@ html {
   }
 
   .wa-composer {
-    min-height: 41px;
+    min-height: 49px;
     padding-top: 3px;
-    padding-bottom: 3px;
+    padding-bottom: 11px;
   }
 
   .wa-input-shell {
