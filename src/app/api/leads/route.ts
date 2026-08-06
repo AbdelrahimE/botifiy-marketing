@@ -12,10 +12,12 @@ import {
 } from "@/lib/consent"
 import { sendLeadToGoogleSheets } from "@/lib/google-sheets"
 import { leadFormSchema } from "@/lib/lead-schema"
+import { qualifyLeadWhatsApp } from "@/lib/lead-whatsapp-gate"
 import { sendMetaLead } from "@/lib/meta-capi"
 import { saveLead } from "@/lib/supabase-leads"
 
 export const runtime = "nodejs"
+export const maxDuration = 60
 
 const MAX_BODY_SIZE = 12_000
 const PRODUCTION_ORIGINS = new Set([
@@ -92,13 +94,65 @@ export async function POST(request: NextRequest) {
 
     const ip = getClientIp(request)
     const userAgent = (request.headers.get("user-agent") ?? "unknown").slice(0, 500)
+    const qualification = await qualifyLeadWhatsApp({
+      name: parsed.name,
+      whatsapp: parsed.whatsapp,
+      submissionKey: parsed.submissionKey,
+    })
+
+    if (qualification.status !== "sent") {
+      logLeadEvent("warn", `whatsapp_${qualification.status}`, { requestId })
+
+      if (qualification.status === "not_registered") {
+        return NextResponse.json(
+          {
+            ok: false,
+            code: "WHATSAPP_NOT_REGISTERED",
+            field: "whatsapp",
+            message: "الرقم ده غير مسجل على واتساب. راجع الرقم وكود الدولة وحاول مرة تانية.",
+          },
+          { status: 422 },
+        )
+      }
+      if (qualification.status === "rate_limited") {
+        return NextResponse.json(
+          {
+            ok: false,
+            code: "RATE_LIMITED",
+            message: "وصلنا أكتر من طلب لنفس الرقم. استنى شوية أو تواصل معانا على واتساب.",
+          },
+          { status: 429 },
+        )
+      }
+
+      return NextResponse.json(
+        {
+          ok: false,
+          code: "WHATSAPP_CHECK_UNAVAILABLE",
+          message: "مقدرناش نتأكد من رقم واتساب دلوقتي. حاول مرة تانية بعد شوية.",
+        },
+        { status: 503 },
+      )
+    }
+
+    logLeadEvent("info", "whatsapp_qualified", {
+      requestId,
+      hasMessageId: Boolean(qualification.whatsappMessageId),
+    })
+
     const consent = parseConsentCookie(request.cookies.get(CONSENT_COOKIE_NAME)?.value)
     const marketingAllowed = allowsMarketingMeasurement(consent)
     const attribution = parseAttributionCookie(
       request.cookies.get(ATTRIBUTION_COOKIE_NAME)?.value,
     )
     const normalizedLead = {
-      ...parsed,
+      name: parsed.name,
+      whatsapp: parsed.whatsapp,
+      businessType: parsed.businessType,
+      needs: parsed.needs,
+      selectedPlan: parsed.selectedPlan,
+      submissionKey: parsed.submissionKey,
+      companyWebsite: parsed.companyWebsite,
       source: attributionSource(attribution, parsed.source),
     }
     const savedLead = await saveLead({

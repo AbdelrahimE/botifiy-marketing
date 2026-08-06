@@ -5,12 +5,16 @@ import { CONSENT_COOKIE_NAME, serializeConsentCookie } from "@/lib/consent"
 
 const mocks = vi.hoisted(() => ({
   saveLead: vi.fn(),
+  qualifyLeadWhatsApp: vi.fn(),
   sendMetaLead: vi.fn(),
   sendLeadToGoogleSheets: vi.fn(),
 }))
 
 vi.mock("server-only", () => ({}))
 vi.mock("@/lib/supabase-leads", () => ({ saveLead: mocks.saveLead }))
+vi.mock("@/lib/lead-whatsapp-gate", () => ({
+  qualifyLeadWhatsApp: mocks.qualifyLeadWhatsApp,
+}))
 vi.mock("@/lib/meta-capi", () => ({ sendMetaLead: mocks.sendMetaLead }))
 vi.mock("@/lib/google-sheets", () => ({ sendLeadToGoogleSheets: mocks.sendLeadToGoogleSheets }))
 
@@ -53,6 +57,10 @@ describe("lead route tracking guarantees", () => {
     })
     mocks.sendMetaLead.mockResolvedValue({ status: "sent", traceId: "trace-1" })
     mocks.sendLeadToGoogleSheets.mockResolvedValue(undefined)
+    mocks.qualifyLeadWhatsApp.mockResolvedValue({
+      status: "sent",
+      whatsappMessageId: "wamid.test",
+    })
   })
 
   afterEach(() => vi.restoreAllMocks())
@@ -63,7 +71,36 @@ describe("lead route tracking guarantees", () => {
     expect(response.status).toBe(202)
     await expect(response.json()).resolves.toEqual({ ok: true, accepted: false })
     expect(mocks.saveLead).not.toHaveBeenCalled()
+    expect(mocks.qualifyLeadWhatsApp).not.toHaveBeenCalled()
     expect(mocks.sendMetaLead).not.toHaveBeenCalled()
+  })
+
+  it("does not save or track a phone that is not registered on WhatsApp", async () => {
+    mocks.qualifyLeadWhatsApp.mockResolvedValue({ status: "not_registered" })
+
+    const response = await POST(leadRequest(validPayload))
+
+    expect(response.status).toBe(422)
+    await expect(response.json()).resolves.toEqual({
+      ok: false,
+      code: "WHATSAPP_NOT_REGISTERED",
+      field: "whatsapp",
+      message: "الرقم ده غير مسجل على واتساب. راجع الرقم وكود الدولة وحاول مرة تانية.",
+    })
+    expect(mocks.saveLead).not.toHaveBeenCalled()
+    expect(mocks.sendMetaLead).not.toHaveBeenCalled()
+    expect(mocks.sendLeadToGoogleSheets).not.toHaveBeenCalled()
+  })
+
+  it("fails closed without saving or tracking when WhatsApp qualification is unavailable", async () => {
+    mocks.qualifyLeadWhatsApp.mockResolvedValue({ status: "unavailable" })
+
+    const response = await POST(leadRequest(validPayload))
+
+    expect(response.status).toBe(503)
+    expect(mocks.saveLead).not.toHaveBeenCalled()
+    expect(mocks.sendMetaLead).not.toHaveBeenCalled()
+    expect(mocks.sendLeadToGoogleSheets).not.toHaveBeenCalled()
   })
 
   it("uses the saved lead ID for CAPI and keeps the paid source", async () => {
@@ -94,6 +131,11 @@ describe("lead route tracking guarantees", () => {
       ),
     )
 
+    expect(mocks.qualifyLeadWhatsApp).toHaveBeenCalledWith({
+      name: validPayload.name,
+      whatsapp: validPayload.whatsapp,
+      submissionKey: validPayload.submissionKey,
+    })
     expect(mocks.saveLead).toHaveBeenCalledWith(
       expect.objectContaining({ source: "facebook", marketingConsent: true }),
     )
@@ -103,6 +145,9 @@ describe("lead route tracking guarantees", () => {
         eventSourceUrl: "https://botifiy.com/activate",
         source: "facebook",
       }),
+    )
+    expect(mocks.qualifyLeadWhatsApp.mock.invocationCallOrder[0]).toBeLessThan(
+      mocks.saveLead.mock.invocationCallOrder[0],
     )
     await expect(response.json()).resolves.toEqual({
       ok: true,

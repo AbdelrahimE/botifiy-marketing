@@ -13,6 +13,39 @@
 - منع أي وصول مباشر للجدول من `anon` و`authenticated`.
 - السماح فقط بتنفيذ RPC باسم `submit_lead`، وفيها validation وsanitization وrate limiting وidempotency.
 
+### بوابة التحقق من واتساب قبل الحفظ
+
+قبل `submit_lead` يستدعي الخادم Edge Function باسم `qualify-lead-whatsapp`. هذه
+الدالة لا تستخدم endpoint فحص منفصل؛ بل ترسل رسالة الترحيب نفسها عبر Botifiy،
+والبنية التحتية تتحقق من تسجيل الرقم على WhatsApp قبل الإرسال. لا يستمر الحفظ أو
+Meta CAPI أو Google Sheets إلا بعد نجاح الإرسال ووجود `whatsappMessageId`.
+
+لا تضيف البوابة أي Widget أو خطوة مرئية إلى الفورم، ولا تحتاج Secret جديدًا في
+مشروع التسويق. يستدعي الخادم الدالة باستخدام `SUPABASE_ANON_KEY` الموجود أصلًا؛
+وهو مفتاح عام وليس Botifiy API Key أو Service Role Key.
+
+المتغيرات السرية الموجودة مسبقًا داخل Supabase وتستخدمها الدالة:
+
+- `SUPABASE_SERVICE_ROLE_KEY`
+- `LEAD_WHATSAPP_MESSAGE_TEMPLATE_BASE64`
+- إعدادات مرسل Botifiy الحالية أو القيم المخزنة في `app_settings`
+- `tenant_api_key` المخزن في `botifiy_tenant_credentials`
+
+انشر الدالتين بعد تحديث مشروع Supabase؛ الثانية تغير مفتاح منع التكرار ليعتمد على
+`submissionKey` والرقم معًا، وبذلك يستطيع Trigger تحديث أعمدة حالة الرسالة دون
+إرسالها مرة ثانية، مع السماح للعميل بتصحيح الرقم الخاطئ في المحاولة التالية:
+
+```bash
+supabase functions deploy qualify-lead-whatsapp
+supabase functions deploy send-lead-whatsapp --no-verify-jwt
+```
+
+الدالة مضبوطة على `verify_jwt = true` وتقبل payload محدودًا ورسالة ثابتة من داخل
+Edge Function فقط. كما تطبق حد الرقم الموجود قبل الإرسال، وتبقى حدود Botifiy API
+فعالة. إذا كان الرقم غير مسجل تعود `422` قبل الحفظ. أما تعطل الفحص أو انقطاع
+المثيل أو بقاء الإرسال في حالة processing فيعود `503` ولا يُصنّف الرقم على أنه
+خاطئ.
+
 ## 2. Google Sheets
 
 1. أنشئ Google Sheet ثم انسخ المعرّف الموجود بين `/d/` و`/edit` في الرابط.
@@ -52,6 +85,9 @@ GOOGLE_SHEETS_WEBHOOK_SECRET=نفس_القيمة_العشوائية
 - `meta_skipped`
 - `meta_skipped_no_consent`
 - `meta_failed`
+- `whatsapp_qualified`
+- `whatsapp_not_registered`
+- `whatsapp_unavailable`
 
 لا تُكتب أسماء العملاء أو أرقامهم في logs.
 

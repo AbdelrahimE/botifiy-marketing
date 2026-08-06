@@ -126,6 +126,8 @@ export function ActivationForm({ initialCountry, selectedPlan, source }: Activat
             leadId?: string
             source?: string
             message?: string
+            code?: string
+            field?: string
           }
         | null
 
@@ -133,6 +135,14 @@ export function ActivationForm({ initialCountry, selectedPlan, source }: Activat
         if (response.ok && result?.ok && result?.accepted === false) {
           setIsSuccess(true)
           window.scrollTo({ top: 0, behavior: "smooth" })
+          return
+        }
+        if (result?.field === "whatsapp") {
+          setErrors((current) => ({
+            ...current,
+            whatsapp: result.message ?? "راجع رقم واتساب وحاول مرة تانية.",
+          }))
+          document.getElementById("lead-whatsapp")?.focus()
           return
         }
         throw new Error(result?.message ?? "حصلت مشكلة مؤقتة. حاول مرة تانية.")
